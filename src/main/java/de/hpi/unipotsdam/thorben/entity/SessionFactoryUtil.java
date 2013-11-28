@@ -1,5 +1,6 @@
 package de.hpi.unipotsdam.thorben.entity;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -21,4 +22,7 @@ public class SessionFactoryUtil {
         return sessionFactory;
     }
 
+    public static Session openSession() {
+      return sessionFactory.openSession();
+    }
 }
