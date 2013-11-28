@@ -3,6 +3,7 @@ package de.hpi.unipotsdam.thorben.resource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,6 +11,7 @@ import org.hibernate.Transaction;
 import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
 import de.hpi.unipotsdam.thorben.entity.NewsThread;
 import de.hpi.unipotsdam.thorben.entity.SessionFactoryUtil;
+import de.hpi.unipotsdam.thorben.exception.RestException;
 
 @Produces(MediaType.APPLICATION_JSON)
 public class ThreadResource {
@@ -28,7 +30,7 @@ public class ThreadResource {
     tx.commit();
     
     if (thread == null) {
-      // TODO do exception handling, throw 404
+      throw new RestException("News thread with id " + threadId + " does not exist", Status.NOT_FOUND);
     }
     
     return NewsThreadDto.fromNewsThread(thread);
