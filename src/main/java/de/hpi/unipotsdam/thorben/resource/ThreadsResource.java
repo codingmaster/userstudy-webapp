@@ -1,12 +1,15 @@
 package de.hpi.unipotsdam.thorben.resource;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
 import de.hpi.unipotsdam.thorben.entity.NewsThread;
 import de.hpi.unipotsdam.thorben.entity.SessionFactoryUtil;
 
@@ -14,10 +17,15 @@ import de.hpi.unipotsdam.thorben.entity.SessionFactoryUtil;
 public class ThreadsResource {
 
   @POST
-  public void createThread() {
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void createThread(NewsThreadDto newsThreadDto) {
     Session session = SessionFactoryUtil.getSessionFactory().getCurrentSession();
     Transaction tx = session.beginTransaction();
-    session.save(new NewsThread());
+    
+    NewsThread thread = new NewsThread();
+    thread.setDescription(newsThreadDto.getDescription());
+    thread.setTitle(newsThreadDto.getTitle());
+    session.save(thread);
     tx.commit();
   }
   
