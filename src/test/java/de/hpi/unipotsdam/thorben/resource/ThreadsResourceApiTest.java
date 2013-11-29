@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.ws.rs.core.Response.Status;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.jayway.restassured.http.ContentType;
@@ -17,6 +18,20 @@ public class ThreadsResourceApiTest extends AbstractRestTest {
 
   protected String THREAD_RESOURCE_PATH = ROOT_RESOURCE_PATH + "/threads";
   
+  
+  
+  @Before
+  public void setUpEntities() {
+    Session session = SessionFactoryUtil.getSessionFactory().getCurrentSession();
+    Transaction tx = session.beginTransaction();
+    
+    article = new Article();
+    article.setContent("some content");
+    article.setTitle("some title");
+    session.save(article);
+    
+    tx.commit();
+  }
   
   @Test
   public void testThreadCreation() {
