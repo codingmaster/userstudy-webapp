@@ -26,12 +26,16 @@ public class ThreadResource extends AbstractResource {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     NewsThread thread = (NewsThread) session.get(NewsThread.class, threadId);
-    tx.commit();
+    
+    
     
     if (thread == null) {
       throw new RestException("News thread with id " + threadId + " does not exist", Status.NOT_FOUND);
     }
     
-    return NewsThreadDto.fromNewsThread(thread);
+    NewsThreadDto dto = NewsThreadDto.fromNewsThread(thread);
+    tx.commit();
+
+    return dto;
   }
 }

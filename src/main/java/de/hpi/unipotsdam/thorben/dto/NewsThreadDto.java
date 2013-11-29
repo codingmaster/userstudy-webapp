@@ -1,5 +1,6 @@
 package de.hpi.unipotsdam.thorben.dto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,10 +53,12 @@ public class NewsThreadDto {
     dto.title = newsThread.getTitle();
     dto.description = newsThread.getDescription();
     
-    Set<Long> articleIds = new HashSet<Long>();
+    List<Long> articleIds = new ArrayList<Long>();
     for (Article article : newsThread.getArticles()) {
       articleIds.add(article.getId());
     }
+    
+    dto.articles = articleIds;
     
     return dto;
   }
