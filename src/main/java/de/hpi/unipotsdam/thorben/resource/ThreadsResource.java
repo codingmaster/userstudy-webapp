@@ -15,15 +15,14 @@ import org.hibernate.Transaction;
 import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
 import de.hpi.unipotsdam.thorben.entity.Article;
 import de.hpi.unipotsdam.thorben.entity.NewsThread;
-import de.hpi.unipotsdam.thorben.entity.SessionFactoryUtil;
 
 @Path("threads")
-public class ThreadsResource {
+public class ThreadsResource extends AbstractResource {
 
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public void createThread(NewsThreadDto newsThreadDto) {
-    Session session = SessionFactoryUtil.getSessionFactory().getCurrentSession();
+    Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
     NewsThread thread = new NewsThread();
@@ -46,7 +45,9 @@ public class ThreadsResource {
   
   @Path("{id}")
   public ThreadResource getThread(@PathParam("id") Long id) {
-    return new ThreadResource(id);
+    ThreadResource resource = new ThreadResource(id);
+    resource.setSessionHelper(sessionHelper);
+    return resource;
   }
   
   

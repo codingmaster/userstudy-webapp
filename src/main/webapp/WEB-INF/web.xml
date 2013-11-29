@@ -5,18 +5,34 @@
 <web-app>
   <display-name>My User Study App</display-name>
   <servlet>
-      <servlet-name>Resteasy</servlet-name>
-      <servlet-class>
-          org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
-      </servlet-class>
-      <init-param>
-          <param-name>javax.ws.rs.Application</param-name>
-          <param-value>de.hpi.unipotsdam.thorben.UserStudyApplication</param-value>
-      </init-param>
+    <servlet-name>Resteasy</servlet-name>
+    <servlet-class>
+      org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+    </servlet-class>
   </servlet>  
+  
+  <listener>
+    <listener-class>
+      org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+    </listener-class>
+  </listener>
   
   <servlet-mapping>
     <servlet-name>Resteasy</servlet-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+  
+  <context-param>
+    <param-name>resteasy.servlet.mapping.prefix</param-name>
+    <param-value>/rest</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:spring/applicationContext*.xml</param-value>
+  </context-param>
+  
+  <listener>
+    <listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>
+  </listener>
 </web-app>

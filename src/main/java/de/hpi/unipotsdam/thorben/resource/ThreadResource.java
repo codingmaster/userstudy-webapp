@@ -10,11 +10,10 @@ import org.hibernate.Transaction;
 
 import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
 import de.hpi.unipotsdam.thorben.entity.NewsThread;
-import de.hpi.unipotsdam.thorben.entity.SessionFactoryUtil;
 import de.hpi.unipotsdam.thorben.exception.RestException;
 
 @Produces(MediaType.APPLICATION_JSON)
-public class ThreadResource {
+public class ThreadResource extends AbstractResource {
 
   private Long threadId;
   
@@ -24,7 +23,7 @@ public class ThreadResource {
   
   @GET
   public NewsThreadDto getThread() {
-    Session session = SessionFactoryUtil.getSessionFactory().getCurrentSession();
+    Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     NewsThread thread = (NewsThread) session.get(NewsThread.class, threadId);
     tx.commit();

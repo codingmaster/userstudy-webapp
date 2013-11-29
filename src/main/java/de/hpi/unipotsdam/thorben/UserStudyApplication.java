@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-import de.hpi.unipotsdam.thorben.exception.RestException;
 import de.hpi.unipotsdam.thorben.exception.RestExceptionMapper;
 import de.hpi.unipotsdam.thorben.resource.ThreadsResource;
 

@@ -10,9 +10,31 @@
   
   <properties>
     <resteasy.version>3.0.5.Final</resteasy.version>
+    <spring.version>3.2.5.RELEASE</spring.version>
   </properties>
   
   <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+      
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxrs</artifactId>
@@ -24,6 +46,12 @@
       <artifactId>resteasy-jackson2-provider</artifactId>
       <version>${resteasy.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-spring</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+    
     
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -43,13 +71,19 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-    
     <dependency>
       <groupId>com.jayway.restassured</groupId>
       <artifactId>rest-assured</artifactId>
       <version>1.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>1.9.5</version>
+      <scope>test</scope>
+    </dependency>
+            
     
     <dependency>
       <groupId>org.jboss.resteasy</groupId>

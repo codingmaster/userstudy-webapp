@@ -6,7 +6,7 @@ import org.junit.BeforeClass;
 
 import com.jayway.restassured.RestAssured;
 
-import de.hpi.unipotsdam.thorben.UserStudyApplication;
+import de.unipotsdam.hpi.thorben.MockUserStudyApplication;
 
 public abstract class AbstractRestTest {
 
@@ -23,7 +23,7 @@ public abstract class AbstractRestTest {
     server.setRootResourcePath(ROOT_RESOURCE_PATH);
     server.setPort(TEST_HTTP_PORT);
     
-    server.getDeployment().setApplication(new UserStudyApplication());
+    server.getDeployment().setApplication(new MockUserStudyApplication());
     
     server.start();
   }
