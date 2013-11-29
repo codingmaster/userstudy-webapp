@@ -1,5 +1,8 @@
 package de.hpi.unipotsdam.thorben.resource;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -10,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
+import de.hpi.unipotsdam.thorben.entity.Article;
 import de.hpi.unipotsdam.thorben.entity.NewsThread;
 import de.hpi.unipotsdam.thorben.entity.SessionFactoryUtil;
 
@@ -25,6 +29,17 @@ public class ThreadsResource {
     NewsThread thread = new NewsThread();
     thread.setDescription(newsThreadDto.getDescription());
     thread.setTitle(newsThreadDto.getTitle());
+    
+    Set<Article> articles = new HashSet<Article>();
+    for (Long articleId : newsThreadDto.getArticles()) {
+      Article article = (Article) session.load(Article.class, articleId);
+      if (article != null) {
+        articles.add(article);
+      }
+    }
+    
+    thread.setArticles(articles);
+    
     session.save(thread);
     tx.commit();
   }
