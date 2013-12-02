@@ -7,15 +7,21 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import de.hpi.unipotsdam.thorben.dto.UserDto;
 import de.hpi.unipotsdam.thorben.entity.Role;
 import de.hpi.unipotsdam.thorben.entity.UserEntity;
+import de.hpi.unipotsdam.thorben.exception.RestException;
+import de.hpi.unipotsdam.thorben.security.MyUserDetails;
 
 @Path("users")
 public class UsersResource extends AbstractResource {
@@ -42,8 +48,27 @@ public class UsersResource extends AbstractResource {
   }
   
   @Path("{id}")
+  @Produces(MediaType.APPLICATION_JSON)
   public UserResource getUser(@PathParam("id") Long userId) {
-    // TODO: authorization check here
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    
+    boolean unauthorized = true;
+    
+    if (authentication != null) {
+      Object principal = authentication.getPrincipal();
+      if (principal instanceof MyUserDetails) {
+        MyUserDetails userDetails = (MyUserDetails) principal;
+        
+        if (userId.equals(userDetails.getUserId())) {
+          unauthorized = false;
+        }
+      }
+    }
+    
+    if (unauthorized) {
+      throw new RestException(Status.FORBIDDEN);
+    }
+    
     return new UserResource(userId, sessionHelper);
   }
 }

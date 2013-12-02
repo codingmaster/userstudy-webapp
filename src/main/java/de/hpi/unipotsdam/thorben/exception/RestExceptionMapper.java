@@ -1,5 +1,6 @@
 package de.hpi.unipotsdam.thorben.exception;
 
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -13,6 +14,6 @@ public class RestExceptionMapper implements ExceptionMapper<RestException> {
   public Response toResponse(RestException e) {
     ExceptionDto dto = ExceptionDto.fromException(e);
     
-    return Response.status(e.getStatus()).entity(dto).build();
+    return Response.status(e.getStatus()).entity(dto).type(MediaType.APPLICATION_JSON).build();
   }
 }

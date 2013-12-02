@@ -21,14 +21,18 @@
   
   <authentication-manager>
     <!-- may have multiple authentication providers -->
-    <authentication-provider>
+    <authentication-provider user-service-ref='userDetailsService'>
       <!-- demo users -->
-      <user-service>
+      <!-- <user-service>
         <user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
         <user name="bob" password="bobspassword" authorities="ROLE_USER" />
-      </user-service>
+      </user-service> -->
     </authentication-provider>
   </authentication-manager>
   
-  <global-method-security secured-annotations="enabled" />
+  <beans:bean id="userDetailsService" class="de.hpi.unipotsdam.thorben.security.MyUserDetailsService">
+    <beans:property name="sessionHelper">
+      <beans:ref bean="sessionHelper"/>
+    </beans:property>
+  </beans:bean>
 </beans:beans>
