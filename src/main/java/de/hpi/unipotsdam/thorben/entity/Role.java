@@ -9,12 +9,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "role")
+public class Role {
 
   private Long id;
   private String name;
-  private String password;
   
   @Id
   @GeneratedValue(generator="increment")
@@ -26,7 +25,7 @@ public class User {
     this.id = id;
   }
   
-  @Column
+  @Column(name = "name", unique = true, nullable = false)
   public String getName() {
     return name;
   }
@@ -34,11 +33,5 @@ public class User {
     this.name = name;
   }
   
-  @Column
-  public String getPassword() {
-    return password;
-  }
-  public void setPassword(String password) {
-    this.password = password;
-  }
+  
 }

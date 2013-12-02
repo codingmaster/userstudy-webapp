@@ -1,5 +1,8 @@
 package de.hpi.unipotsdam.thorben.resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -9,7 +12,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
+import de.hpi.unipotsdam.thorben.dto.ThreadItemDto;
 import de.hpi.unipotsdam.thorben.entity.NewsThread;
+import de.hpi.unipotsdam.thorben.entity.ThreadItem;
 import de.hpi.unipotsdam.thorben.exception.RestException;
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -27,8 +32,6 @@ public class ThreadResource extends AbstractResource {
     Transaction tx = session.beginTransaction();
     NewsThread thread = (NewsThread) session.get(NewsThread.class, threadId);
     
-    
-    
     if (thread == null) {
       throw new RestException("News thread with id " + threadId + " does not exist", Status.NOT_FOUND);
     }
@@ -37,5 +40,23 @@ public class ThreadResource extends AbstractResource {
     tx.commit();
 
     return dto;
+  }
+  
+  @GET
+  public List<ThreadItemDto> getItems() {
+    Session session = sessionHelper.getCurrentSession();
+    Transaction tx = session.beginTransaction();
+    NewsThread thread = (NewsThread) session.get(NewsThread.class, threadId);
+    
+    List<ThreadItemDto> itemDtos = new ArrayList<ThreadItemDto>();
+    for (ThreadItem item : thread.getItems()) {
+      itemDtos.add(ThreadItemDto.fromThreadItem(item));
+    }
+    
+    tx.commit();
+    
+    return itemDtos;
+    
+    
   }
 }

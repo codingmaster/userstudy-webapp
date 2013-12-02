@@ -7,15 +7,16 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
   <http>
     <!-- may have multiple such 'intercept-url' tags been matched in declared order -->
-    <intercept-url pattern="/**" access="ROLE_USER" /> <!-- attribute 'requires-channel="https"' -->
-    <!-- <http-basic /> -->
-    <form-login /> <!-- attribute 'login-page' -->
-    <logout /> <!-- attribute 'logout-url' -->
+    <intercept-url pattern="/rest/users" method="POST" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+    <intercept-url pattern="/rest/threads" method="POST" access="ROLE_ADMIN"/> 
+    <intercept-url pattern="/rest/**" access="ROLE_USER" /> <!-- attribute 'requires-channel="https"' -->
+    
+    <http-basic />
     <!-- <openid-login /> -->
   </http>
   
   <!-- Example to bypass security for certain urls -->
-  <!-- <http pattern="/css/**" security="none"/> -->
+<!--   <http pattern="/css/**" security="none"/> -->
   
   
   <authentication-manager>

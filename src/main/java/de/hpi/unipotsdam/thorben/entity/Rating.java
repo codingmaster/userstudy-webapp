@@ -17,7 +17,7 @@ public class Rating {
 
   private Long id;
   private Integer rating;
-  private User user;
+  private UserEntity user;
   private ThreadItem threadItem;
   
   @Id
@@ -40,10 +40,10 @@ public class Rating {
   
   @ManyToOne
   @JoinColumn(name = "user_id")
-  public User getUser() {
+  public UserEntity getUser() {
     return user;
   }
-  public void setUser(User user) {
+  public void setUser(UserEntity user) {
     this.user = user;
   }
   

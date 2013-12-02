@@ -19,13 +19,13 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
-        <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- Names the annotated entity class -->
         <mapping class="de.hpi.unipotsdam.thorben.entity.NewsThread"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.Article"/>
-        <mapping class="de.hpi.unipotsdam.thorben.entity.User"/>
+        <mapping class="de.hpi.unipotsdam.thorben.entity.UserEntity"/>
+        <mapping class="de.hpi.unipotsdam.thorben.entity.Role"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.ThreadItem"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.Rating"/>
 
