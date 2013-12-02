@@ -14,19 +14,6 @@ import de.hpi.unipotsdam.thorben.resource.ThreadsResource;
 @ApplicationPath("/")
 public class MockUserStudyApplication extends Application {
 
-//  @Override
-//  public Set<Class<?>> getClasses() {
-//    Set<Class<?>> classes = new HashSet<Class<?>>();
-//    
-//    // resources
-//    classes.add(ThreadsResource.class);
-//    
-//    // providers
-//    classes.add(RestExceptionMapper.class);
-//    
-//    return classes;
-//  }
-  
   @Override
   public Set<Object> getSingletons() {
     Set<Object> resources = new HashSet<Object>();

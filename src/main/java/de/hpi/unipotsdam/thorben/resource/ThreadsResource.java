@@ -1,8 +1,5 @@
 package de.hpi.unipotsdam.thorben.resource;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,34 +9,34 @@ import javax.ws.rs.core.MediaType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
+import de.hpi.unipotsdam.thorben.dto.CreateNewsThreadDto;
 import de.hpi.unipotsdam.thorben.entity.Article;
 import de.hpi.unipotsdam.thorben.entity.NewsThread;
+import de.hpi.unipotsdam.thorben.entity.ThreadItem;
 
 @Path("threads")
 public class ThreadsResource extends AbstractResource {
 
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  public void createThread(NewsThreadDto newsThreadDto) {
+  public void createThread(CreateNewsThreadDto newsThreadDto) {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
     NewsThread thread = new NewsThread();
     thread.setDescription(newsThreadDto.getDescription());
     thread.setTitle(newsThreadDto.getTitle());
+    session.save(thread);
     
-    Set<Article> articles = new HashSet<Article>();
-    for (Long articleId : newsThreadDto.getArticles()) {
-      Article article = (Article) session.load(Article.class, articleId);
-      if (article != null) {
-        articles.add(article);
-      }
+    for (Long id : newsThreadDto.getArticleIds()) {
+      ThreadItem item = new ThreadItem();
+      item.setThread(thread);
+      
+      Article article = (Article) session.get(Article.class, id);
+      item.setArticle(article);
+      session.save(item);
     }
     
-    thread.setArticles(articles);
-    
-    session.save(thread);
     tx.commit();
   }
   

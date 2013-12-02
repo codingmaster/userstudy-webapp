@@ -6,9 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -20,7 +18,7 @@ public class NewsThread {
   private Long id;
   private String title;
   private String description;
-  private Set<Article> articles;
+  private Set<ThreadItem> items;
   
   @Id
   @GeneratedValue(generator="increment")
@@ -51,14 +49,12 @@ public class NewsThread {
     this.description = description;
   }
 
-  @ManyToMany
-  @JoinTable(name = "thread_article", joinColumns = { @JoinColumn(name = "thread_id") }, 
-    inverseJoinColumns = { @JoinColumn(name = "article_id") })
-  public Set<Article> getArticles() {
-    return articles;
+  @OneToMany(mappedBy = "thread")
+  public Set<ThreadItem> getItems() {
+    return items;
   }
 
-  public void setArticles(Set<Article> articles) {
-    this.articles = articles;
+  public void setItems(Set<ThreadItem> items) {
+    this.items = items;
   }
 }

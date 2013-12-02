@@ -10,10 +10,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
+import de.hpi.unipotsdam.thorben.dto.CreateNewsThreadDto;
 import de.hpi.unipotsdam.thorben.entity.Article;
 import de.hpi.unipotsdam.thorben.entity.NewsThread;
 import de.hpi.unipotsdam.thorben.entity.SessionHelper;
+import de.hpi.unipotsdam.thorben.entity.ThreadItem;
 
 public class ThreadsResourceLogicTest {
 
@@ -44,13 +45,13 @@ public class ThreadsResourceLogicTest {
     ThreadsResource threadsResource = new ThreadsResource();
     threadsResource.setSessionHelper(sessionHelper);
     
-    NewsThreadDto dto = new NewsThreadDto();
+    CreateNewsThreadDto dto = new CreateNewsThreadDto();
     dto.setTitle("some title");
     dto.setDescription("some description");
     
     List<Long> articleIds = new ArrayList<Long>();
     articleIds.add(article.getId());
-    dto.setArticles(articleIds);
+    dto.setArticleIds(articleIds);
     
     threadsResource.createThread(dto);
 
@@ -63,7 +64,12 @@ public class ThreadsResourceLogicTest {
     NewsThread thread = (NewsThread) threads.get(0);
     Assert.assertEquals("some title", thread.getTitle());
     Assert.assertEquals("some description", thread.getDescription());
-    Assert.assertEquals(1, thread.getArticles().size());
+    Assert.assertEquals(1, thread.getItems().size());
+    
+    ThreadItem item = thread.getItems().toArray(new ThreadItem[]{})[0];
+    Assert.assertEquals(article.getId(), item.getArticle().getId());
+    Assert.assertEquals(article.getContent(), item.getArticle().getContent());
+    Assert.assertEquals(article.getTitle(), item.getArticle().getTitle());
     
     tx.commit();
   }

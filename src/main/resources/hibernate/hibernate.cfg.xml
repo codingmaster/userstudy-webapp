@@ -25,6 +25,9 @@
         <!-- Names the annotated entity class -->
         <mapping class="de.hpi.unipotsdam.thorben.entity.NewsThread"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.Article"/>
+        <mapping class="de.hpi.unipotsdam.thorben.entity.User"/>
+        <mapping class="de.hpi.unipotsdam.thorben.entity.ThreadItem"/>
+        <mapping class="de.hpi.unipotsdam.thorben.entity.Rating"/>
 
     </session-factory>
 
