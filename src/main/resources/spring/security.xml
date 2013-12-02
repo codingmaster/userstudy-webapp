@@ -1,0 +1,33 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd">
+  <http>
+    <!-- may have multiple such 'intercept-url' tags been matched in declared order -->
+    <intercept-url pattern="/**" access="ROLE_USER" /> <!-- attribute 'requires-channel="https"' -->
+    <!-- <http-basic /> -->
+    <form-login /> <!-- attribute 'login-page' -->
+    <logout /> <!-- attribute 'logout-url' -->
+    <!-- <openid-login /> -->
+  </http>
+  
+  <!-- Example to bypass security for certain urls -->
+  <!-- <http pattern="/css/**" security="none"/> -->
+  
+  
+  <authentication-manager>
+    <!-- may have multiple authentication providers -->
+    <authentication-provider>
+      <!-- demo users -->
+      <user-service>
+        <user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
+        <user name="bob" password="bobspassword" authorities="ROLE_USER" />
+      </user-service>
+    </authentication-provider>
+  </authentication-manager>
+  
+  <global-method-security secured-annotations="enabled" />
+</beans:beans>

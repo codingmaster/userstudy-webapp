@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.security.access.annotation.Secured;
 
 import de.hpi.unipotsdam.thorben.dto.CreateNewsThreadDto;
 import de.hpi.unipotsdam.thorben.entity.Article;
@@ -19,6 +20,7 @@ public class ThreadsResource extends AbstractResource {
 
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
+  @Secured("ROLE_ADMIN")
   public void createThread(CreateNewsThreadDto newsThreadDto) {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
