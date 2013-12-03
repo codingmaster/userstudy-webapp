@@ -9,7 +9,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
             <ref bean="sessionHelper"/>
         </property>
     </bean>
-    <bean id="usersResource" class="de.hpi.unipotsdam.thorben.resource.UsersResource">
+    <bean id="usersResource" class="de.hpi.unipotsdam.thorben.resource.ParticipantsResource">
         <property name="sessionHelper">
             <ref bean="sessionHelper"/>
         </property>

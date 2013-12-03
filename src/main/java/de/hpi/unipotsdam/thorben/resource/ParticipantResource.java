@@ -16,18 +16,18 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import de.hpi.unipotsdam.thorben.dto.RatingDto;
+import de.hpi.unipotsdam.thorben.entity.Participant;
 import de.hpi.unipotsdam.thorben.entity.Rating;
 import de.hpi.unipotsdam.thorben.entity.SessionHelper;
 import de.hpi.unipotsdam.thorben.entity.ThreadItem;
-import de.hpi.unipotsdam.thorben.entity.UserEntity;
 import de.hpi.unipotsdam.thorben.exception.RestException;
 
-public class UserResource extends AbstractResource {
+public class ParticipantResource extends AbstractResource {
 
-  private Long userId;
+  private String participantId;
   
-  public UserResource(Long userId, SessionHelper sessionHelper) {
-    this.userId = userId;
+  public ParticipantResource(String participantId, SessionHelper sessionHelper) {
+    this.participantId = participantId;
     this.sessionHelper = sessionHelper;
   }
   
@@ -44,8 +44,8 @@ public class UserResource extends AbstractResource {
     ThreadItem item = (ThreadItem) session.load(ThreadItem.class, ratingDto.getItemId());
     rating.setThreadItem(item);
     
-    UserEntity user = (UserEntity) session.load(UserEntity.class, userId);
-    rating.setUser(user);
+    Participant participant = (Participant) session.load(Participant.class, participantId);
+    rating.setParticipant(participant);
     
     session.save(rating);
     

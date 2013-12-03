@@ -25,6 +25,7 @@
         <mapping class="de.hpi.unipotsdam.thorben.entity.NewsThread"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.Article"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.UserEntity"/>
+        <mapping class="de.hpi.unipotsdam.thorben.entity.Participant"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.Role"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.ThreadItem"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.Rating"/>
