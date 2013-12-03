@@ -1,11 +1,13 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title>My User Study App</title>
+<!doctype html>
+<html ng-app="project">
+	<head>
+    <script src="assets/vendor/angular/angular.js"></script>
+    <script src="assets/vendor/angular/angular-route.js"></script>
+    <script src="assets/vendor/angular/angular-resource.js"></script>
+    <script src="app/services.js"></script>
+    <script src="app/project.js"></script>
   </head>
   <body>
-    <p>
-      Add things here
-    </p>
+    <div ng-view></div>
   </body>
 </html>

@@ -8,6 +8,7 @@
   <http>
     <!-- may have multiple such 'intercept-url' tags been matched in declared order -->
     <intercept-url pattern="/rest/users" method="POST" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+    <intercept-url pattern="/rest/threads" method="GET" access="IS_AUTHENTICATED_ANONYMOUSLY"/> <!-- TODO: remove -->
     <intercept-url pattern="/rest/threads" method="POST" access="ROLE_ADMIN"/> 
     <intercept-url pattern="/rest/**" access="ROLE_USER" /> <!-- attribute 'requires-channel="https"' -->
     
