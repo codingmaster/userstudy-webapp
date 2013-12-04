@@ -3,7 +3,6 @@ package de.hpi.unipotsdam.thorben.resource;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -61,6 +60,11 @@ public class ParticipantResource extends AbstractResource {
     
     Rating rating = (Rating) session.get(Rating.class, ratingId);
     rating.setRating(ratingDto.getRating());
+    
+    if (!rating.getParticipant().getId().equals(participantId)) {
+      throw new RestException("Mismatching user id to update rating " + ratingId, Status.FORBIDDEN);
+    }
+    
     session.update(rating);
     ratingDto.updateFrom(rating);
     
@@ -76,7 +80,10 @@ public class ParticipantResource extends AbstractResource {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
-    Rating rating = (Rating) session.createCriteria(Rating.class).add(Restrictions.eq("threadItem.id", itemId)).uniqueResult();
+    Rating rating = (Rating) session.createCriteria(Rating.class)
+        .add(Restrictions.eq("participant.id", participantId))
+        .add(Restrictions.eq("threadItem.id", itemId))
+        .uniqueResult();
     
     if (rating == null) {
       tx.rollback();
