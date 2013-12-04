@@ -21,10 +21,7 @@ angular.module('project', ['ngRoute', 'threadsServices'])
   $provide.factory('HttpErrorInterceptor', function($rootScope, $q) {
     return {
       'responseError': function(rejection) {
-        console.log(rejection);
-        console.log(rejection.status);
         $rootScope.errors.push(rejection.data);
-        console.log($rootScope);
         return $q.reject(rejection);
       }
     }
