@@ -6,11 +6,11 @@ angular.module('project', ['ngRoute', 'threadsServices'])
       controller: 'UserController',
       templateUrl: 'app/create_user.html'
     })
-    .when('/:userid', {
+    .when('/:participantid', {
       controller: 'ThreadsController',
       templateUrl: 'app/threads.html'
     })
-    .when('/:userid/thread/:threadid', {
+    .when('/:participantid/thread/:threadid', {
       controller: 'ThreadController',
       templateUrl: 'app/thread.html'
     })
@@ -19,21 +19,22 @@ angular.module('project', ['ngRoute', 'threadsServices'])
     });
 })
 
-.controller('ThreadsController', function($scope, Threads) {
-  /*$scope.threads = [
-    {title: 'A thread title', description: 'a thread description'},
-    {title: 'Another thread title', description: 'lorem ipsum'}
-  ]*/
+.controller('ThreadsController', ['$scope', '$routeParams', 'Threads', function($scope, $routeParams, Threads) {
   $scope.threads = Threads.query();
-})
+  $scope.participantid = $routeParams.participantid;
+}])
 
 .controller('UserController', function($scope, $location, Users) {
-  $scope.user = {};
+  $scope.participant = CurrentParticipant;
   
   $scope.createUser = function() {
-    $scope.user = Users.save($scope.user, function() {
-      $location.path($scope.user.id);
+    $scope.participant = Participants.save($scope.participant, function() {
+      $location.path($scope.participant.id);
     });
-    
   }
+})
+
+.controller('ThreadController', function($scope, $routeParams, Threads) {
+  $scope.thread = Threads.get({threadid: $routeParams.threadid});
+  $scope.items = Threads.getItems({threadid: $routeParams.threadid});
 });

@@ -1,0 +1,10 @@
+<h1>{{thread.title}}:</h1>
+<ul>
+  <li ng-repeat="item in items">
+    <div>
+      <h2 ng-click="visible = !visible">{{item.article.title}}</h2>
+      <p ng-show="visible">{{item.article.content}}</p>
+      <div>Add some rating stuff here</div>
+    </div>
+  </li>
+</ul>

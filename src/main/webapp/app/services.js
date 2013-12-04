@@ -1,9 +1,12 @@
 angular.module('threadsServices', ['ngResource'])
 
 .factory('Threads', function($resource) {
-  return $resource('rest/threads/:threadid', {}, []);
+  var url = 'rest/threads/:threadid';
+  return $resource(url,
+    {},
+    {getItems: {method: 'GET', url: url + '/items', isArray: true}});
 })
 
-.factory('Users', function($resource) {
+.factory('Participants', function($resource) {
   return $resource('rest/participants/:participantid');
 });

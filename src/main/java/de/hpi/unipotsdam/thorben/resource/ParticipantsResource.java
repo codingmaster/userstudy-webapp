@@ -23,7 +23,7 @@ public class ParticipantsResource extends AbstractResource {
     Transaction tx = session.beginTransaction();
     
     Participant participant = new Participant();
-    participant.setName(participantDto.getUsername());
+    participant.setName(participantDto.getName());
     
     session.save(participant);
     
