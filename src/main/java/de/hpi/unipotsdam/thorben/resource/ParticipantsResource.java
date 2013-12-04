@@ -18,7 +18,7 @@ public class ParticipantsResource extends AbstractResource {
   
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  public void createParticipant(ParticipantDto participantDto) {
+  public ParticipantDto createParticipant(ParticipantDto participantDto) {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
@@ -28,6 +28,10 @@ public class ParticipantsResource extends AbstractResource {
     session.save(participant);
     
     tx.commit();
+    
+    participantDto.updateFrom(participant);
+    
+    return participantDto;
   }
   
   @Path("{id}")

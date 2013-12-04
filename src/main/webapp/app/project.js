@@ -27,10 +27,13 @@ angular.module('project', ['ngRoute', 'threadsServices'])
   $scope.threads = Threads.query();
 })
 
-.controller('UserController', function($scope, Users) {
-  $scope.username = null;
+.controller('UserController', function($scope, $location, Users) {
+  $scope.user = {};
   
   $scope.createUser = function() {
-    Users.save({username: $scope.username});
+    $scope.user = Users.save($scope.user, function() {
+      $location.path($scope.user.id);
+    });
+    
   }
 });
