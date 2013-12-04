@@ -3,7 +3,7 @@ angular.module('project', ['ngRoute', 'threadsServices'])
 .config(function($routeProvider) {
   $routeProvider
     .when('/', {
-      controller: 'UserController',
+      controller: 'ParticipantsController',
       templateUrl: 'app/create_user.html'
     })
     .when('/:participantid', {
@@ -24,10 +24,10 @@ angular.module('project', ['ngRoute', 'threadsServices'])
   $scope.participantid = $routeParams.participantid;
 }])
 
-.controller('UserController', function($scope, $location, Users) {
-  $scope.participant = CurrentParticipant;
+.controller('ParticipantsController', function($scope, $location, Participants) {
+  $scope.participant = {};
   
-  $scope.createUser = function() {
+  $scope.createParticipant = function() {
     $scope.participant = Participants.save($scope.participant, function() {
       $location.path($scope.participant.id);
     });
@@ -37,4 +37,19 @@ angular.module('project', ['ngRoute', 'threadsServices'])
 .controller('ThreadController', function($scope, $routeParams, Threads) {
   $scope.thread = Threads.get({threadid: $routeParams.threadid});
   $scope.items = Threads.getItems({threadid: $routeParams.threadid});
+})
+
+.controller('ItemController', function($scope, $routeParams, Ratings) {
+  $scope.participantid = $routeParams.participantid;
+  $scope.rating = Ratings.get({participantid: $scope.participantid, itemId: $scope.item.id}, function() {
+  }, function(response) {
+    if (response.status == 404) {
+      $scope.rating = Ratings.save({participantid: $scope.participantid}, {itemId: $scope.item.id});
+    }
+  });
+  
+  $scope.saveRating = function() {
+    $scope.rating.$save({participantid: $scope.participantid});
+  };
+  
 });

@@ -53,17 +53,20 @@ public class ParticipantResource extends AbstractResource {
   }
   
   @Path("ratings/{ratingId}")
-  @PUT
+  @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  public void updateRating(@PathParam("ratingId") Long ratingId, RatingDto ratingDto) {
+  public RatingDto updateRating(@PathParam("ratingId") Long ratingId, RatingDto ratingDto) {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
     Rating rating = (Rating) session.get(Rating.class, ratingId);
     rating.setRating(ratingDto.getRating());
     session.update(rating);
+    ratingDto.updateFrom(rating);
     
     tx.commit();
+    
+    return ratingDto;
   }
   
   @Path("ratings")
@@ -73,9 +76,10 @@ public class ParticipantResource extends AbstractResource {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
-    Rating rating = (Rating) session.createCriteria(Rating.class).add(Restrictions.eq("item_id", itemId)).uniqueResult();
+    Rating rating = (Rating) session.createCriteria(Rating.class).add(Restrictions.eq("threadItem.id", itemId)).uniqueResult();
     
     if (rating == null) {
+      tx.rollback();
       throw new RestException(Status.NOT_FOUND);
     }
     

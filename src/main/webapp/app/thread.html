@@ -1,10 +1,13 @@
 <h1>{{thread.title}}:</h1>
 <ul>
-  <li ng-repeat="item in items">
+  <li ng-repeat="item in items" ng-controller="ItemController">
     <div>
       <h2 ng-click="visible = !visible">{{item.article.title}}</h2>
       <p ng-show="visible">{{item.article.content}}</p>
-      <div>Add some rating stuff here</div>
+      <div>
+        Rating: <input type="text" ng-model="rating.rating" /><br />
+        <button ng-click="saveRating()">SAVE</button>
+      </div>
     </div>
   </li>
 </ul>
