@@ -1,14 +1,10 @@
 <h1>{{thread.title}}:</h1>
 <ul>
-  <li ng-repeat="item in items" ng-controller="ItemController">
-    <div>
-      <h2 ng-click="visible = !visible">{{item.article.title}}</h2>
-      <p ng-show="visible">{{item.article.content}}</p>
-      <div>
-        Rating: <input type="text" ng-model="rating.rating" /><br />
-        <button ng-click="saveRating()">SAVE</button>
-      </div>
-      <div userstudy-rating rating-value="rating.rating" max="10" on-rating-selected="saveRating(newRating)"></div>
+  <li ng-repeat="item in items" ng-controller="ItemController" class="thread-item-container" ng-class="{active: visible}">
+    <div class="inline-container">
+      <h2 ng-click="visible = !visible" class="collapsable">{{item.article.title}}</h2>
+      <div userstudy-rating title="'Surprise Rating'" rating-value="rating.rating" max="10" on-rating-selected="saveRating(newRating)" class="right"></div>
     </div>
+    <p ng-show="visible">{{item.article.content}}</p>
   </li>
 </ul>

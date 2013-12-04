@@ -1,3 +1,24 @@
+/* general */
+h1 {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 24pt;
+}
+
+h2 {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 18pt;
+}
+
+h4 {
+  font-size: 11pt;
+}
+
+li {
+  padding: 3px;
+  margin: 20px;
+}
+
+/* rating directive */
 .rating{
   color: #a9a9a9;
   margin: 0;
@@ -11,8 +32,57 @@
   text-align: center;
   font-weight: bold;
   cursor: pointer;
+  margin: 0;
 }
 
 .rating .filled {
   color: #21568b;
+}
+
+/* error notification area */
+.errors {
+  padding: 10px;
+}
+
+.error {
+  background-color: #FF4D4D;
+}
+
+/* standard notification area */
+.notifications {
+  padding: 10px;
+}
+
+.notification {
+  background-color: #FFFF4D;
+}
+
+li.thread-container {
+  list-style-type: none;
+}
+
+li.thread-item-container {
+  list-style-type: none;
+  outline: solid;
+  outline-width: 2px;
+}
+
+.view {
+  margin: 50px;
+}
+
+.active {
+  background-color: #e3eff9;
+}
+
+.collapsable {
+  cursor: pointer;
+}
+
+.inline-container > * {
+  display: inline;
+}
+
+.right {
+  float: right;
 }

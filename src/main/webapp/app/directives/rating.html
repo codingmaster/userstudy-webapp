@@ -1,3 +1,6 @@
-<ul class="rating">
-  <li ng-repeat="star in stars" ng-click="toggle($index)" ng-class="{filled: star.filled}">&#x2605;</li>
-</ul>
+<div class="inline-container">
+  <h4>{{title}}</h4>
+  <ul class="rating">
+    <li ng-repeat="star in stars" ng-click="toggle($index)" ng-class="{filled: star.filled}">&#x2605;</li>
+  </ul>
+</div>

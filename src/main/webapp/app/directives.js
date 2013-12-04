@@ -7,6 +7,7 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
     scope: {
       ratingValue: '=',
       max: '=',
+      title: '=',
       onRatingSelected: '&'
     },
     link: function (scope, element, attributes) {

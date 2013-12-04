@@ -11,19 +11,19 @@
   </head>
   <body>
     <!-- TODO: make this a directive -->
-    <div ng-init="errors = []">
-      <div ng-repeat="error in errors">
+    <div ng-init="errors = []" class="errors">
+      <div ng-repeat="error in errors" class="error">
         <div>Error: {{error.message}}</div>
         <div ng-click="errors.splice($index, 1)">remove</div>
       </div>
     </div>
     
-    <div ng-init="notifications = []">
-      <div ng-repeat="notification in notifications">
+    <div ng-init="notifications = []" class="notifications">
+      <div ng-repeat="notification in notifications" class="notification">
         <div>Notification: {{notification.message}}</div>
         <div ng-click="notifications.splice($index, 1)">remove</div>
       </div>
     </div>
-    <div ng-view></div>
+    <div ng-view class="view"></div>
   </body>
 </html>
