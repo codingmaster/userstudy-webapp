@@ -88,7 +88,7 @@ public class ParticipantResource extends AbstractResource {
     
     if (rating == null) {
       tx.rollback();
-      throw new RestException(Status.NOT_FOUND);
+      throw new RestException("Rating for item " + itemId + " not found", Status.NOT_FOUND);
     }
     
     RatingDto dto = RatingDto.fromRating(rating);
