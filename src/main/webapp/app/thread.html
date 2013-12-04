@@ -8,6 +8,7 @@
         Rating: <input type="text" ng-model="rating.rating" /><br />
         <button ng-click="saveRating()">SAVE</button>
       </div>
+      <div userstudy-rating rating-value="rating.rating" max="10" on-rating-selected="saveRating(newRating)"></div>
     </div>
   </li>
 </ul>

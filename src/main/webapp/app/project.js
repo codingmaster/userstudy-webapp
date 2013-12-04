@@ -1,4 +1,4 @@
-angular.module('project', ['ngRoute', 'threadsServices'])
+angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
 
 .config( function($provide, $httpProvider, $routeProvider) {
   $routeProvider
@@ -60,9 +60,8 @@ angular.module('project', ['ngRoute', 'threadsServices'])
     }
   });
   
-  $scope.saveRating = function() {
+  $scope.saveRating = function(rating) {
+    $scope.rating.rating = rating;
     $scope.rating.$save({participantid: $scope.participantid});
   };
-  
 });
-

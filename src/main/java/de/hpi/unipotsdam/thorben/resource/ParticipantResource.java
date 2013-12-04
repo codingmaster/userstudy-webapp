@@ -33,7 +33,8 @@ public class ParticipantResource extends AbstractResource {
   @Path("ratings")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  public void createRating(RatingDto ratingDto) {
+  @Produces(MediaType.APPLICATION_JSON)
+  public RatingDto createRating(RatingDto ratingDto) {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
@@ -47,14 +48,17 @@ public class ParticipantResource extends AbstractResource {
     rating.setParticipant(participant);
     
     session.save(rating);
+    ratingDto.updateFrom(rating);
     
     tx.commit();
+    
+    return ratingDto;
   }
   
   @Path("ratings/{ratingId}")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  public RatingDto updateRating(@PathParam("ratingId") Long ratingId, RatingDto ratingDto) {
+  public void updateRating(@PathParam("ratingId") Long ratingId, RatingDto ratingDto) {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
@@ -66,11 +70,8 @@ public class ParticipantResource extends AbstractResource {
     }
     
     session.update(rating);
-    ratingDto.updateFrom(rating);
     
     tx.commit();
-    
-    return ratingDto;
   }
   
   @Path("ratings")

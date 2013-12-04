@@ -1,4 +1,4 @@
-angular.module('threadsServices', ['ngResource'])
+angular.module('restApi', ['ngResource'])
 
 .factory('Threads', function($resource) {
   var url = 'rest/threads/:threadid';

@@ -9,7 +9,7 @@ import de.hpi.unipotsdam.thorben.dto.ExceptionDto;
 
 @Provider
 public class RestExceptionMapper implements ExceptionMapper<RestException> {
-
+  
   @Override
   public Response toResponse(RestException e) {
     ExceptionDto dto = ExceptionDto.fromException(e);
