@@ -8,6 +8,12 @@
     <script src="app/project.js"></script>
   </head>
   <body>
+    <div ng-init="errors = []">
+      <div ng-repeat="error in errors">
+        <div>Error: {{error.message}}</div>
+        <div ng-click="errors.splice($index, 1)">remove</div>
+      </div>
+    </div>
     <div ng-view></div>
   </body>
 </html>

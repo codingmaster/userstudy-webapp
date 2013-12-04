@@ -1,6 +1,6 @@
 angular.module('project', ['ngRoute', 'threadsServices'])
 
-.config(function($routeProvider) {
+.config( function($provide, $httpProvider, $routeProvider) {
   $routeProvider
     .when('/', {
       controller: 'ParticipantsController',
@@ -17,6 +17,20 @@ angular.module('project', ['ngRoute', 'threadsServices'])
     .otherwise({
       redirectTo:'/'
     });
+    
+  $provide.factory('HttpErrorInterceptor', function($rootScope, $q) {
+    return {
+      'responseError': function(rejection) {
+        console.log(rejection);
+        console.log(rejection.status);
+        $rootScope.errors.push(rejection.data);
+        console.log($rootScope);
+        return $q.reject(rejection);
+      }
+    }
+  });
+  
+  $httpProvider.interceptors.push('HttpErrorInterceptor');
 })
 
 .controller('ThreadsController', ['$scope', '$routeParams', 'Threads', function($scope, $routeParams, Threads) {
@@ -53,3 +67,4 @@ angular.module('project', ['ngRoute', 'threadsServices'])
   };
   
 });
+
