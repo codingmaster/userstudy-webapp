@@ -38,12 +38,13 @@ angular.module('project', ['ngRoute', 'threadsServices'])
   $scope.participantid = $routeParams.participantid;
 }])
 
-.controller('ParticipantsController', function($scope, $location, Participants) {
+.controller('ParticipantsController', function($scope, $rootScope, $location, Participants) {
   $scope.participant = {};
   
   $scope.createParticipant = function() {
     $scope.participant = Participants.save($scope.participant, function() {
       $location.path($scope.participant.id);
+      $rootScope.notifications.push({message: 'Make sure to save this url, if you want to continue your work later on'});
     });
   }
 })
