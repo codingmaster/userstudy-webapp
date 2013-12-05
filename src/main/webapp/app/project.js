@@ -21,6 +21,9 @@ angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
   $provide.factory('HttpErrorInterceptor', function($rootScope, $q) {
     return {
       'responseError': function(rejection) {
+        if (rejection.config.bypassInterceptor && rejection.config.bypassInterceptor.onError == rejection.status) {
+          return $q.reject(rejection);
+        }
         $rootScope.errors.push(rejection.data);
         return $q.reject(rejection);
       }
@@ -51,17 +54,21 @@ angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
   $scope.items = Threads.getItems({threadid: $routeParams.threadid});
 })
 
-.controller('ItemController', function($scope, $routeParams, Ratings) {
+.controller('ItemController', function($scope, $routeParams, $http, Ratings) {
   $scope.participantid = $routeParams.participantid;
-  $scope.rating = Ratings.get({participantid: $scope.participantid, itemId: $scope.item.id}, function() {
-  }, function(response) {
-    if (response.status == 404) {
-      $scope.rating = Ratings.save({participantid: $scope.participantid}, {itemId: $scope.item.id});
-    }
-  });
+  $http.get('rest/participants/' + $scope.participantid + '/ratings', {params: {itemId: $scope.item.id}, bypassInterceptor: {onError: 404}})
+    .success(function(data, status, headers, config) {
+      $scope.rating = data;
+    })
+    .error(function(data, status, headers, config) {
+      $scope.rating = Ratings.save({participantid: $scope.participantid}, {itemId: $scope.item.id})
+    });
   
   $scope.saveRating = function(rating) {
-    $scope.rating.rating = rating;
-    $scope.rating.$save({participantid: $scope.participantid});
+    //$scope.rating.$save({participantid: $scope.participantid});
+    Ratings.save({participantid: $scope.participantid, ratingid: $scope.rating.id}, {rating: rating},
+    function() {
+      $scope.rating.rating = rating;
+    });
   };
 });
