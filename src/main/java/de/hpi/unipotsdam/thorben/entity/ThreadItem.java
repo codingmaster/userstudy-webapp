@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -12,6 +14,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "item", uniqueConstraints = {@UniqueConstraint(columnNames = {"thread_id", "article_id"})})
+@NamedQueries({
+  @NamedQuery(name="ThreadItem.selectArticlesForThread", 
+      query="SELECT i from ThreadItem i WHERE i.thread.id = :threadId ORDER BY i.article.publicationDate ASC")
+})
 public class ThreadItem {
 
   private Long id;

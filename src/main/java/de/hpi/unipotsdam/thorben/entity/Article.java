@@ -1,5 +1,7 @@
 package de.hpi.unipotsdam.thorben.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ public class Article {
   private Long id;
   private String title;
   private String content;
+  private Timestamp publicationDate;
   
   @Id
   @GeneratedValue(generator="increment")
@@ -44,5 +47,16 @@ public class Article {
   public void setContent(String content) {
     this.content = content;
   }
+
+  @Column(name = "publication_date")
+  public Timestamp getPublicationDate() {
+    return publicationDate;
+  }
+
+  public void setPublicationDate(Timestamp publicationDate) {
+    this.publicationDate = publicationDate;
+  }
+  
+  
 
 }

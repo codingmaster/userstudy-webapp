@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -48,10 +49,13 @@ public class ThreadResource extends AbstractResource {
   public List<ThreadItemDto> getItems() {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
-    NewsThread thread = (NewsThread) session.get(NewsThread.class, threadId);
+    
+    Query itemQuery = session.getNamedQuery("ThreadItem.selectArticlesForThread");
+    itemQuery.setParameter("threadId", threadId);
+    List<ThreadItem> items = itemQuery.list();
     
     List<ThreadItemDto> itemDtos = new ArrayList<ThreadItemDto>();
-    for (ThreadItem item : thread.getItems()) {
+    for (ThreadItem item : items) {
       itemDtos.add(ThreadItemDto.fromThreadItem(item));
     }
     

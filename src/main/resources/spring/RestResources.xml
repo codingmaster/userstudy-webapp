@@ -20,4 +20,5 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <bean id="genericExceptionMapper" class="de.hpi.unipotsdam.thorben.exception.GenericExceptionMapper"/>
     
     <bean id="jacksonMapper" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+    <bean id="jacksonConfigurator" class="de.hpi.unipotsdam.thorben.resource.JacksonConfigurator"/>
 </beans>

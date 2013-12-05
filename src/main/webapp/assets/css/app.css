@@ -2,15 +2,18 @@
 h1 {
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 24pt;
+  margin: 7px;
 }
 
 h2 {
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 18pt;
+  margin: 5px;
 }
 
 h4 {
   font-size: 11pt;
+  margin: 2px;
 }
 
 li {
@@ -80,8 +83,12 @@ li.thread-item-container {
   cursor: pointer;
 }
 
+.inline-container {
+  overflow: hidden;
+}
+
 .inline-container > * {
-  display: inline;
+  display: inline-block;
 }
 
 .right {
