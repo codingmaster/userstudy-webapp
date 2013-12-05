@@ -50,6 +50,7 @@ angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
 })
 
 .controller('ThreadController', function($scope, $routeParams, Threads) {
+  $scope.participantId = $routeParams.participantid;
   $scope.thread = Threads.get({threadid: $routeParams.threadid});
   $scope.items = Threads.getItems({threadid: $routeParams.threadid});
 })

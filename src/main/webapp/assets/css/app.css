@@ -21,6 +21,11 @@ li {
   margin: 20px;
 }
 
+p {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+}
+
 /* rating directive */
 .rating{
   color: #a9a9a9;
@@ -94,3 +99,11 @@ li.thread-item-container {
 .right {
   float: right;
 }
+
+.footer {
+  font-size: 12pt;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+}
+
