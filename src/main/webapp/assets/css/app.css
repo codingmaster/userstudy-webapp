@@ -26,6 +26,12 @@ p {
   font-size: 12pt;
 }
 
+td {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 11pt;
+  padding-right: 10px;
+}
+
 /* rating directive */
 .rating{
   color: #a9a9a9;
@@ -46,6 +52,13 @@ p {
 .rating .filled {
   color: #21568b;
 }
+
+/* likert-item directive */
+.likert-item {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
 
 /* error notification area */
 .errors {

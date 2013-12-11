@@ -1,7 +1,7 @@
 <tr>
   <td>{{item.stimulus}}</td>
   <td class="inline-container">
-    <div ng-repeat="option in options">
+    <div ng-repeat="option in options" class="likert-item">
       <input type="radio" ng-model="item.rating" value="{{option.value}}" name="{{subjectId}}-{{item.id}}"></input>{{option.label}}
     </div>
   </td>

@@ -69,7 +69,7 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
   
   $scope.likertOptions = [
     {value: 1,
-    label: 'Strong Disagree'},
+    label: 'Strongly Disagree'},
     {value: 2,
     label: 'Somewhat Disagree'},
     {value: 3,
@@ -77,7 +77,7 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
     {value: 4,
     label: 'Somewhat Agree'},
     {value: 5,
-    label: 'Strong Agree'}];
+    label: 'Strongly Agree'}];
   
   $scope.saveLikertRating = function(rating, likertItemId) {
     console.log('Rating: ' + rating);
