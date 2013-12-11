@@ -42,6 +42,7 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
     templateUrl: 'app/directives/likert-item.html',
     scope: {
       item: '=',
+      options: '=',
       onRatingSelected: '&'
     },
     
@@ -62,6 +63,7 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
     templateUrl: 'app/directives/likert-items.html',
     scope: {
       items: '=',
+      options: '=',
       onRatingSelected: '&'
     },
     link: function(scope, element, attributes) {

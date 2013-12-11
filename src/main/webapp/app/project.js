@@ -59,25 +59,18 @@ angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
   $scope.likertItems = [{
     id: 'q1',
     stimulus: 'Rate me',
-    options: [
-    {value: 1,
-    label: 'Disagree'},
-    {value: 2,
-    label: 'Dunno'},
-    {value: 3,
-    label: 'Agree'}]
   },
   {
     id: 'q2',
-    stimulus: 'Rate me more',
-    options: [
+    stimulus: 'Rate me more'}];
+  
+  $scope.likertOptions = [
     {value: 1,
     label: 'Disagree'},
     {value: 2,
     label: 'Dunno'},
     {value: 3,
-    label: 'Agree'}]
-  }];
+    label: 'Agree'}];
   
   $scope.saveLikertRating = function(rating, likertItemId) {
     console.log('Rating: ' + rating);
