@@ -43,6 +43,7 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
     scope: {
       item: '=',
       options: '=',
+      subjectId: '=',
       onRatingSelected: '&'
     },
     
@@ -64,6 +65,7 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
     scope: {
       items: '=',
       options: '=',
+      subjectId: '=',
       onRatingSelected: '&'
     },
     link: function(scope, element, attributes) {
