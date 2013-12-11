@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -40,7 +41,8 @@ public class Article {
     this.title = title;
   }
   
-  @Column(name = "content")
+  @Lob
+  @Column(name = "content", length = 512)
   public String getContent() {
     return content;
   }
@@ -49,7 +51,8 @@ public class Article {
     this.content = content;
   }
   
-  @Column(name = "abstract")
+  @Lob
+  @Column(name = "abstract", length = 512)
   public String getAbstractContent() {
     return abstractContent;
   }
