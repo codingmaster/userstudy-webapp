@@ -1,4 +1,4 @@
-angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
+angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_directives'])
 
 .config( function($provide, $httpProvider, $routeProvider) {
   $routeProvider
