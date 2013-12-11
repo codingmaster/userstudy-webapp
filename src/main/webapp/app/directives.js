@@ -34,4 +34,23 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
       updateStars();
     }
   }
+})
+
+.directive('likertItem', function() {
+  return {
+    restrict: 'A',
+    templateUrl: 'app/directives/likert-item.html',
+    scope: {
+      item: '=',
+      onRatingSelected: '&'
+    },
+    
+    link: function(scope, element, attributes) {
+      scope.$watch('item.rating', function(newVal, oldVal) {
+        if (newVal) {
+          scope.onRatingSelected({newRating: newVal, itemId: scope.item.id});
+        }
+      });
+    }
+  }
 });

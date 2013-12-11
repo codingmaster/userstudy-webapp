@@ -56,6 +56,23 @@ angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
 })
 
 .controller('ItemController', function($scope, $routeParams, $http, Ratings) {
+  $scope.likertItems = [{
+    id: 'q1',
+    stimulus: 'Rate me',
+    options: [
+    {value: 1,
+    label: 'Disagree'},
+    {value: 2,
+    label: 'Dunno'},
+    {value: 3,
+    label: 'Agree'}]
+  }];
+  
+  $scope.saveLikertRating = function(rating, likertItemId) {
+    console.log('Rating: ' + rating);
+    console.log('Item: ' + likertItemId);
+  };
+  
   $scope.participantid = $routeParams.participantid;
   $http.get('rest/participants/' + $scope.participantid + '/ratings', {params: {itemId: $scope.item.id}, bypassInterceptor: {onError: 404}})
     .success(function(data, status, headers, config) {

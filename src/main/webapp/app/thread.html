@@ -9,6 +9,7 @@
     <div class="inline-container">
       <div userstudy-rating title="'Surprise Rating'" rating-value="rating.rating" max="5" on-rating-selected="saveRating(newRating)" class="right"></div>
     </div>
+    <div ng-repeat="likertItem in likertItems" likert-item item="likertItem" on-rating-selected="saveLikertRating(newRating, itemId)"></div>
   </li>
 </ul>
 <a ng-href="#/{{participantId}}">Home</a>
