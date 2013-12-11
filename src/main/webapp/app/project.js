@@ -66,6 +66,17 @@ angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
     label: 'Dunno'},
     {value: 3,
     label: 'Agree'}]
+  },
+  {
+    id: 'q2',
+    stimulus: 'Rate me more',
+    options: [
+    {value: 1,
+    label: 'Disagree'},
+    {value: 2,
+    label: 'Dunno'},
+    {value: 3,
+    label: 'Agree'}]
   }];
   
   $scope.saveLikertRating = function(rating, likertItemId) {

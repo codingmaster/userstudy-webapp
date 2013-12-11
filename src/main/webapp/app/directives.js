@@ -47,10 +47,27 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
     
     link: function(scope, element, attributes) {
       scope.$watch('item.rating', function(newVal, oldVal) {
+        console.log(newVal);
         if (newVal) {
           scope.onRatingSelected({newRating: newVal, itemId: scope.item.id});
         }
       });
+    }
+  }
+})
+
+.directive('likertItems', function() {
+  return {
+    restrict: 'A',
+    templateUrl: 'app/directives/likert-items.html',
+    scope: {
+      items: '=',
+      onRatingSelected: '&'
+    },
+    link: function(scope, element, attributes) {
+      scope.saveRating = function(rating, likertItemId) {
+        scope.onRatingSelected({newRating: rating, itemId: likertItemId});
+      }
     }
   }
 });
