@@ -17,6 +17,7 @@ public class Article {
   private Long id;
   private String title;
   private String content;
+  private String abstractContent;
   private Timestamp publicationDate;
   
   @Id
@@ -46,6 +47,15 @@ public class Article {
   
   public void setContent(String content) {
     this.content = content;
+  }
+  
+  @Column(name = "abstract")
+  public String getAbstractContent() {
+    return abstractContent;
+  }
+
+  public void setAbstractContent(String abstractContent) {
+    this.abstractContent = abstractContent;
   }
 
   @Column(name = "publication_date")

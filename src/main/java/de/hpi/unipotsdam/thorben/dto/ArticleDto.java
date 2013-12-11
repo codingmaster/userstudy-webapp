@@ -9,6 +9,7 @@ public class ArticleDto {
   private Long id;
   private String title;
   private String content;
+  private String abstractContent;
   private Date publicationDate;
   
   public Long getId() {
@@ -35,6 +36,14 @@ public class ArticleDto {
     this.content = content;
   }
   
+  public String getAbstractContent() {
+    return abstractContent;
+  }
+  
+  public void setAbstractContent(String abstractContent) {
+    this.abstractContent = abstractContent;
+  }
+  
   public Date getPublicationDate() {
     return publicationDate;
   }
@@ -48,6 +57,7 @@ public class ArticleDto {
     dto.id = article.getId();
     dto.title = article.getTitle();
     dto.content = article.getContent();
+    dto.abstractContent = article.getAbstractContent();
     dto.publicationDate = article.getPublicationDate();
     return dto;
   }
