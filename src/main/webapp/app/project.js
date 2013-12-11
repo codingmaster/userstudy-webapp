@@ -58,19 +58,26 @@ angular.module('project', ['ngRoute', 'restApi', 'userstudy_directives'])
 .controller('ItemController', function($scope, $routeParams, $http, Ratings) {
   $scope.likertItems = [{
     id: 'q1',
-    stimulus: 'Rate me',
+    stimulus: 'The entities mentioned in the article belong to this topic',
   },
   {
     id: 'q2',
-    stimulus: 'Rate me more'}];
+    stimulus: 'The article introduces unexepected relationships between entities'},
+  {
+    id: 'q3',
+    stimulus: 'The article combines the known information with a new topical area'}];
   
   $scope.likertOptions = [
     {value: 1,
-    label: 'Disagree'},
+    label: 'Strong Disagree'},
     {value: 2,
-    label: 'Dunno'},
+    label: 'Somewhat Disagree'},
     {value: 3,
-    label: 'Agree'}];
+    label: 'Neither, nor'},
+    {value: 4,
+    label: 'Somewhat Agree'},
+    {value: 5,
+    label: 'Strong Agree'}];
   
   $scope.saveLikertRating = function(rating, likertItemId) {
     console.log('Rating: ' + rating);
