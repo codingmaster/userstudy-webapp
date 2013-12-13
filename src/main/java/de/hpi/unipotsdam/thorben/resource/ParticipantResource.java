@@ -1,5 +1,8 @@
 package de.hpi.unipotsdam.thorben.resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,6 +19,7 @@ import org.hibernate.criterion.Restrictions;
 
 import de.hpi.unipotsdam.thorben.dto.RatingDto;
 import de.hpi.unipotsdam.thorben.entity.Participant;
+import de.hpi.unipotsdam.thorben.entity.QuestionItem;
 import de.hpi.unipotsdam.thorben.entity.Rating;
 import de.hpi.unipotsdam.thorben.entity.SessionHelper;
 import de.hpi.unipotsdam.thorben.entity.ThreadItem;
@@ -47,6 +51,9 @@ public class ParticipantResource extends AbstractResource {
     Participant participant = (Participant) session.load(Participant.class, participantId);
     rating.setParticipant(participant);
     
+    QuestionItem question = (QuestionItem) session.load(QuestionItem.class, ratingDto.getQuestionId());
+    rating.setQuestionItem(question);
+    
     session.save(rating);
     ratingDto.updateFrom(rating);
     
@@ -77,25 +84,23 @@ public class ParticipantResource extends AbstractResource {
   @Path("ratings")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public RatingDto getRating(@QueryParam("itemId") Long itemId) {
+  public List<RatingDto> getRatings(@QueryParam("itemId") Long itemId) {
     Session session = sessionHelper.getCurrentSession();
     Transaction tx = session.beginTransaction();
     
-    Rating rating = (Rating) session.createCriteria(Rating.class)
+    List<Rating> ratings = session.createCriteria(Rating.class)
         .add(Restrictions.eq("participant.id", participantId))
         .add(Restrictions.eq("threadItem.id", itemId))
-        .uniqueResult();
+        .list();
     
-    if (rating == null) {
-      tx.rollback();
-      throw new RestException("Rating for item " + itemId + " not found", Status.NOT_FOUND);
+    List<RatingDto> result = new ArrayList<RatingDto>();
+    for (Rating rating : ratings) {
+      result.add(RatingDto.fromRating(rating));
     }
-    
-    RatingDto dto = RatingDto.fromRating(rating);
     
     tx.commit();
     
-    return dto;
+    return result;
   }
   
 }

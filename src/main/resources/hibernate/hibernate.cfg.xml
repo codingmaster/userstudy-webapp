@@ -29,6 +29,7 @@
         <mapping class="de.hpi.unipotsdam.thorben.entity.Role"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.ThreadItem"/>
         <mapping class="de.hpi.unipotsdam.thorben.entity.Rating"/>
+        <mapping class="de.hpi.unipotsdam.thorben.entity.QuestionItem"/>
 
     </session-factory>
 

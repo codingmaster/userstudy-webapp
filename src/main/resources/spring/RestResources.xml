@@ -14,6 +14,11 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
             <ref bean="sessionHelper"/>
         </property>
     </bean>
+    <bean id="questionsResource" class="de.hpi.unipotsdam.thorben.resource.QuestionsResource">
+        <property name="sessionHelper">
+            <ref bean="sessionHelper"/>
+        </property>
+    </bean>
     
     <!-- Exception mappers -->
     <bean id="restExceptionMapper" class="de.hpi.unipotsdam.thorben.exception.RestExceptionMapper"/>

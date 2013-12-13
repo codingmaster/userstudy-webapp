@@ -7,9 +7,9 @@
     </div>
     <div ng-bind-html="item.article.abstractContent"></div>
     <div ng-bind-html="item.article.content" ng-show="visible"></div>
-    <div class="inline-container">
+    <!--<div class="inline-container">
       <div userstudy-rating title="'Surprise Rating'" rating-value="rating.rating" max="5" on-rating-selected="saveRating(newRating)" class="right"></div>
-    </div>
+    </div>-->
     <div likert-items subject-id="item.id" items="likertItems" options="likertOptions" on-rating-selected="saveLikertRating(newRating, itemId)"></div>
   </li>
 </ul>

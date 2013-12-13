@@ -1,6 +1,5 @@
 package de.hpi.unipotsdam.thorben.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,17 +9,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "rating", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "item_id"})})
+@Table(name = "rating", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "item_id", "question_id"})})
 public class Rating {
 
   private Long id;
   private Integer rating;
   private Participant participant;
   private ThreadItem threadItem;
+  private QuestionItem question;
   
   @Id
   @GeneratedValue(generator="increment")
@@ -56,6 +55,16 @@ public class Rating {
   }
   public void setThreadItem(ThreadItem threadItem) {
     this.threadItem = threadItem;
+  }
+  
+  @ManyToOne
+  @JoinColumn(name = "question_id")
+  public QuestionItem getQuestionItem() {
+    return question;
+  }
+  
+  public void setQuestionItem(QuestionItem questionItem) {
+    this.question = questionItem;
   }
   
   
