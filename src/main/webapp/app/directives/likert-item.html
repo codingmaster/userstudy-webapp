@@ -1,8 +1,8 @@
 <tr>
-  <td>{{item.stimulus}}</td>
+  <td>{{item.question.content}}</td>
   <td class="inline-container">
     <div ng-repeat="option in options" class="likert-item">
-      <input type="radio" ng-model="item.rating" value="{{option.value}}" name="{{subjectId}}-{{item.id}}"></input>{{option.label}}
+      <input type="radio" ng-model="item.rating.rating" value="{{option.value}}" name="{{subjectId}}-{{item.question.id}}"></input>{{option.label}}
     </div>
   </td>
 </tr>

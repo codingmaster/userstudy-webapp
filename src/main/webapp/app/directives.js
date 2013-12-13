@@ -48,10 +48,9 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
     },
     
     link: function(scope, element, attributes) {
-      scope.$watch('item.rating', function(newVal, oldVal) {
-        console.log(newVal);
+      scope.$watch('item.rating.rating', function(newVal, oldVal) {
         if (newVal) {
-          scope.onRatingSelected({newRating: newVal, itemId: scope.item.id});
+          scope.onRatingSelected({rating: scope.item.rating});
         }
       });
     }
@@ -69,8 +68,8 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
       onRatingSelected: '&'
     },
     link: function(scope, element, attributes) {
-      scope.saveRating = function(rating, likertItemId) {
-        scope.onRatingSelected({newRating: rating, itemId: likertItemId});
+      scope.saveRating = function(rating) {
+        scope.onRatingSelected({rating: rating});
       }
     }
   }

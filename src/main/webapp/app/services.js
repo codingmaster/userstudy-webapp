@@ -15,4 +15,8 @@ angular.module('restApi', ['ngResource'])
 
 .factory('Ratings', function($resource) {
   return $resource('rest/participants/:participantid/ratings/:ratingid', {ratingid: '@id'});
+})
+
+.factory('Questions', function($resource) {
+  return $resource('rest/questions/:questionid');
 });
