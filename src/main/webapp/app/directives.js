@@ -49,7 +49,7 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
     
     link: function(scope, element, attributes) {
       scope.$watch('item.rating.rating', function(newVal, oldVal) {
-        if (newVal) {
+        if (newVal && newVal != oldVal) {
           scope.onRatingSelected({rating: scope.item.rating});
         }
       });
