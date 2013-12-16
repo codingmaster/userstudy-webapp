@@ -40,6 +40,10 @@ td {
   padding-right: 10px;
 }
 
+div {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
 /* rating directive */
 .rating{
   color: #a9a9a9;
@@ -63,6 +67,10 @@ td {
 
 /* likert-item directive */
 .likert-item {
+  margin-top: 15px;
+}
+
+.likert-option {
   margin-right: 5px;
   margin-left: 5px;
 }

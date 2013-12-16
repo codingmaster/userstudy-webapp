@@ -50,7 +50,7 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
     } else if (ratedItems > 0) {
       return 'You can do this';
     } else {
-      return 'Nothing done yet';
+      return 'Not started yet';
     }
   };
   
@@ -74,7 +74,7 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
   $scope.questions = Questions.query();
 })
 
-.controller('ItemController', function($scope, $routeParams, $http, Ratings) {
+.controller('ItemController', function($scope, $routeParams, $http, $interpolate, Ratings) {
   
   $scope.likertOptions = [
     {value: 1,
@@ -106,6 +106,7 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
         });
         
         angular.forEach(questions, function(question) {
+          question.content = $interpolate(question.content)($scope);
           var rating = ratingsByQuestion[question.id];
           if (!rating) {
             rating = new Ratings({itemId: $scope.item.id, questionId: question.id});
@@ -115,7 +116,7 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
         });
       });
     }
-  )
+  );
   
   $scope.saveRating = function(rating) {
     $scope.rating.$save({participantid: $scope.participantid});
@@ -124,4 +125,5 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
       $scope.rating.rating = rating;
     });
   };
+ 
 });
