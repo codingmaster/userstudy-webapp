@@ -7,7 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.hpi.unipotsdam.thorben.dto.QuestionDto;
 import de.hpi.unipotsdam.thorben.entity.QuestionItem;
@@ -16,12 +16,11 @@ import de.hpi.unipotsdam.thorben.entity.QuestionItem;
 public class QuestionsResource extends AbstractResource {
 
   @GET
+  @Transactional(readOnly = true)
   public List<QuestionDto> getQuestions() {
     List<QuestionDto> result = new ArrayList<QuestionDto>();
     
     Session session = sessionHelper.getCurrentSession();
-    
-    Transaction tx = session.beginTransaction();
     
     List<QuestionItem> questionItems = session.createCriteria(QuestionItem.class).list();
     
@@ -29,9 +28,6 @@ public class QuestionsResource extends AbstractResource {
       result.add(QuestionDto.fromQuestion(questionItem));
     }
     
-    tx.commit();
-    
     return result;
-    
   }
 }

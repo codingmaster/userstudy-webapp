@@ -13,7 +13,7 @@ public abstract class AbstractRestTest {
   protected static final int TEST_HTTP_PORT = 8080;
   protected static final String ROOT_RESOURCE_PATH = "/rest-test";
   
-  private static NettyJaxrsServer server;
+  protected static NettyJaxrsServer server;
   
   @BeforeClass
   public static void setUp() {

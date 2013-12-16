@@ -8,12 +8,26 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
         <property name="sessionHelper">
             <ref bean="sessionHelper"/>
         </property>
+        <property name="threadResource">
+            <ref bean="threadResource"/>
+        </property>
     </bean>
-    <bean id="usersResource" class="de.hpi.unipotsdam.thorben.resource.ParticipantsResource">
+    
+    <bean id="threadResource" class="de.hpi.unipotsdam.thorben.resource.ThreadResource">
         <property name="sessionHelper">
             <ref bean="sessionHelper"/>
         </property>
     </bean>
+    
+    <bean id="participantsResource" class="de.hpi.unipotsdam.thorben.resource.ParticipantsResource">
+        <property name="sessionHelper" ref="sessionHelper"/>
+        <property name="participantResource" ref="participantResource"/>
+    </bean>
+    
+    <bean id="participantResource" class="de.hpi.unipotsdam.thorben.resource.ParticipantResource">
+        <property name="sessionHelper" ref="sessionHelper"/>
+    </bean>
+    
     <bean id="questionsResource" class="de.hpi.unipotsdam.thorben.resource.QuestionsResource">
         <property name="sessionHelper">
             <ref bean="sessionHelper"/>

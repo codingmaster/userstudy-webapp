@@ -5,13 +5,14 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
 import de.hpi.unipotsdam.thorben.dto.ThreadItemDto;
@@ -22,16 +23,11 @@ import de.hpi.unipotsdam.thorben.exception.RestException;
 @Produces(MediaType.APPLICATION_JSON)
 public class ThreadResource extends AbstractResource {
 
-  private Long threadId;
-  
-  public ThreadResource(Long threadId) {
-    this.threadId = threadId;
-  }
-  
+
   @GET
-  public NewsThreadDto getThread() {
+  @Transactional(readOnly = true)
+  public NewsThreadDto getThread(@PathParam("id") Long threadId) {
     Session session = sessionHelper.getCurrentSession();
-    Transaction tx = session.beginTransaction();
     NewsThread thread = (NewsThread) session.get(NewsThread.class, threadId);
     
     if (thread == null) {
@@ -39,16 +35,14 @@ public class ThreadResource extends AbstractResource {
     }
     
     NewsThreadDto dto = NewsThreadDto.fromNewsThread(thread);
-    tx.commit();
-
     return dto;
   }
   
   @GET
   @Path("items")
-  public List<ThreadItemDto> getItems() {
+  @Transactional(readOnly = true)
+  public List<ThreadItemDto> getItems(@PathParam("id") Long threadId) {
     Session session = sessionHelper.getCurrentSession();
-    Transaction tx = session.beginTransaction();
     
     Query itemQuery = session.getNamedQuery("ThreadItem.selectArticlesForThread");
     itemQuery.setParameter("threadId", threadId);
@@ -59,10 +53,6 @@ public class ThreadResource extends AbstractResource {
       itemDtos.add(ThreadItemDto.fromThreadItem(item));
     }
     
-    tx.commit();
-    
     return itemDtos;
-    
-    
   }
 }

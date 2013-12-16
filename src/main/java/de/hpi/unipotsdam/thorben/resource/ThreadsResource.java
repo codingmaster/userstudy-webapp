@@ -12,7 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.hpi.unipotsdam.thorben.dto.CreateNewsThreadDto;
 import de.hpi.unipotsdam.thorben.dto.NewsThreadDto;
@@ -23,11 +25,13 @@ import de.hpi.unipotsdam.thorben.entity.ThreadItem;
 @Path("threads")
 public class ThreadsResource extends AbstractResource {
 
+  private ThreadResource threadResource;
+  
   @GET
   @Produces(MediaType.APPLICATION_JSON)
+  @Transactional(readOnly = true)
   public List<NewsThreadDto> getAllThreads() {
     Session session = sessionHelper.getCurrentSession();
-    Transaction tx = session.beginTransaction();
     
     List threads = session.createCriteria(NewsThread.class).list();
     List<NewsThreadDto> result = new ArrayList<NewsThreadDto>();
@@ -36,16 +40,14 @@ public class ThreadsResource extends AbstractResource {
       result.add(dto);
     }
     
-    tx.commit();
-    
     return result;
   }
   
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
+  @Transactional
   public void createThread(CreateNewsThreadDto newsThreadDto) {
     Session session = sessionHelper.getCurrentSession();
-    Transaction tx = session.beginTransaction();
     
     NewsThread thread = new NewsThread();
     thread.setDescription(newsThreadDto.getDescription());
@@ -60,16 +62,20 @@ public class ThreadsResource extends AbstractResource {
       item.setArticle(article);
       session.save(item);
     }
-    
-    tx.commit();
   }
   
   @Path("{id}")
-  public ThreadResource getThread(@PathParam("id") Long id) {
-    ThreadResource resource = new ThreadResource(id);
-    resource.setSessionHelper(sessionHelper);
-    return resource;
+  public ThreadResource getThread() {
+    
+    return threadResource;
   }
-  
+
+  public ThreadResource getThreadResource() {
+    return threadResource;
+  }
+
+  public void setThreadResource(ThreadResource threadResource) {
+    this.threadResource = threadResource;
+  }
   
 }

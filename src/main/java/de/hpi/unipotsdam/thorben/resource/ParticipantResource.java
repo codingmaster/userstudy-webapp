@@ -14,33 +14,28 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.hpi.unipotsdam.thorben.dto.RatingDto;
 import de.hpi.unipotsdam.thorben.entity.Participant;
 import de.hpi.unipotsdam.thorben.entity.QuestionItem;
 import de.hpi.unipotsdam.thorben.entity.Rating;
-import de.hpi.unipotsdam.thorben.entity.SessionHelper;
 import de.hpi.unipotsdam.thorben.entity.ThreadItem;
 import de.hpi.unipotsdam.thorben.exception.RestException;
 
 public class ParticipantResource extends AbstractResource {
-
-  private String participantId;
   
-  public ParticipantResource(String participantId, SessionHelper sessionHelper) {
-    this.participantId = participantId;
-    this.sessionHelper = sessionHelper;
-  }
   
   @Path("ratings")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public RatingDto createRating(RatingDto ratingDto) {
+  @Transactional
+  public RatingDto createRating(@PathParam("id") String participantId, RatingDto ratingDto) {
+    ensureParticipantExists(participantId);
+    
     Session session = sessionHelper.getCurrentSession();
-    Transaction tx = session.beginTransaction();
     
     Rating rating = new Rating();
     rating.setRating(ratingDto.getRating());
@@ -57,7 +52,6 @@ public class ParticipantResource extends AbstractResource {
     session.save(rating);
     ratingDto.updateFrom(rating);
     
-    tx.commit();
     
     return ratingDto;
   }
@@ -65,9 +59,11 @@ public class ParticipantResource extends AbstractResource {
   @Path("ratings/{ratingId}")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  public void updateRating(@PathParam("ratingId") Long ratingId, RatingDto ratingDto) {
+  @Transactional
+  public void updateRating(@PathParam("id") String participantId, @PathParam("ratingId") Long ratingId, RatingDto ratingDto) {
+    ensureParticipantExists(participantId);
+    
     Session session = sessionHelper.getCurrentSession();
-    Transaction tx = session.beginTransaction();
     
     Rating rating = (Rating) session.get(Rating.class, ratingId);
     rating.setRating(ratingDto.getRating());
@@ -77,16 +73,16 @@ public class ParticipantResource extends AbstractResource {
     }
     
     session.update(rating);
-    
-    tx.commit();
   }
   
   @Path("ratings")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public List<RatingDto> getRatings(@QueryParam("itemId") Long itemId) {
+  @Transactional(readOnly = true)
+  public List<RatingDto> getRatings(@PathParam("id") String participantId, @QueryParam("itemId") Long itemId) {
+    ensureParticipantExists(participantId);
+    
     Session session = sessionHelper.getCurrentSession();
-    Transaction tx = session.beginTransaction();
     
     List<Rating> ratings = session.createCriteria(Rating.class)
         .add(Restrictions.eq("participant.id", participantId))
@@ -98,9 +94,16 @@ public class ParticipantResource extends AbstractResource {
       result.add(RatingDto.fromRating(rating));
     }
     
-    tx.commit();
-    
     return result;
+  }
+  
+  private void ensureParticipantExists(String participantId) {
+    Session session = sessionHelper.getCurrentSession();
+    
+    Object participant = session.get(Participant.class, participantId);
+    if (participant == null) {
+      throw new RestException("Participant " + participantId + " does not exist", Status.BAD_REQUEST);
+    }
   }
   
 }
