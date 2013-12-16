@@ -99,16 +99,6 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
     }
   )
   
-  
-  
-  /*$http.get('rest/participants/' + $scope.participantid + '/ratings', {params: {itemId: $scope.item.id}, bypassInterceptor: {onError: 404}})
-    .success(function(data, status, headers, config) {
-      $scope.ratings = data;
-    })
-    .error(function(data, status, headers, config) {
-      $scope.rating = Ratings.save({participantid: $scope.participantid}, {itemId: $scope.item.id})
-    });*/
-  
   $scope.saveRating = function(rating) {
     $scope.rating.$save({participantid: $scope.participantid});
     Ratings.save({participantid: $scope.participantid, ratingid: $scope.rating.id}, {rating: rating},

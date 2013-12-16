@@ -11,8 +11,15 @@ h2 {
   margin: 5px;
 }
 
+h3 {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 14pt;
+  margin: 5px;
+}
+
 h4 {
-  font-size: 11pt;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 10pt;
   margin: 2px;
 }
 
@@ -24,6 +31,7 @@ li {
 p {
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 12pt;
+  margin-top: 2px;
 }
 
 td {
@@ -97,7 +105,8 @@ li.thread-item-container {
   background-color: #e3eff9;
 }
 
-.collapsable {
+.clickable {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   cursor: pointer;
 }
 
