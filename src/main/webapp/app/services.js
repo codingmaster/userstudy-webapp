@@ -14,7 +14,10 @@ angular.module('restApi', ['ngResource'])
 })
 
 .factory('Ratings', function($resource) {
-  return $resource('rest/participants/:participantid/ratings/:ratingid', {ratingid: '@id'});
+  return $resource('rest/participants/:participantid/ratings/:ratingid', {ratingid: '@id'},
+    {
+      count: {method: 'GET', url: 'rest/participants/:participantid/ratings/count'}
+    });
 })
 
 .factory('Questions', function($resource) {

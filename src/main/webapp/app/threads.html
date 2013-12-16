@@ -4,6 +4,7 @@
     <div>
       <h2>{{thread.title}}</h2>
       <p>{{thread.description}}</p>
+      <p>Articles rated: {{ratingsCountByThread[thread.id].count}}/{{thread.itemCount}} - {{getMessageForRating(ratingsCountByThread[thread.id].count, thread.itemCount)}}</p>
       <a ng-href="#/{{participantid}}/thread/{{thread.id}}">Work on it</a>
     </div>
   </li>

@@ -110,7 +110,6 @@ public class ParticipantResource extends AbstractResource {
     
     String query = "select count(distinct item.id) from Rating rating " +
     		"inner join rating.threadItem item " +
-    		//"with rating.item_id = item.id " +
     		"where rating.participant.id = :participantId " +
     		"and item.thread.id = :threadId";
     Number count = (Number) session.createQuery(query)

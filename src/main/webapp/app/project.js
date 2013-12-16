@@ -33,9 +33,27 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
   $httpProvider.interceptors.push('HttpErrorInterceptor');
 })
 
-.controller('ThreadsController', ['$scope', '$routeParams', 'Threads', function($scope, $routeParams, Threads) {
-  $scope.threads = Threads.query();
+.controller('ThreadsController', ['$scope', '$routeParams', 'Threads', 'Ratings', function($scope, $routeParams, Threads, Ratings) {
   $scope.participantid = $routeParams.participantid;
+  var ratingFinishedMessage = 'Thank you!';
+  $scope.ratedItemCounts = {};
+  $scope.ratingsCountByThread = {};
+  $scope.threads = Threads.query({}, function(threads) {
+    threads.forEach(function(thread) {
+      $scope.ratingsCountByThread[thread.id] = Ratings.count({participantid: $scope.participantid, threadId: thread.id});
+    });
+  });
+  
+  $scope.getMessageForRating = function(ratedItems, maxItems) {
+    if (ratedItems == maxItems) {
+      return 'Thank you!';
+    } else if (ratedItems > 0) {
+      return 'You can do this';
+    } else {
+      return 'Nothing done yet';
+    }
+  };
+  
 }])
 
 .controller('ParticipantsController', function($scope, $rootScope, $location, Participants) {
