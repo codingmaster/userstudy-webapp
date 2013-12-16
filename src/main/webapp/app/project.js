@@ -44,7 +44,7 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
   $scope.createParticipant = function() {
     $scope.participant = Participants.save($scope.participant, function() {
       $location.path($scope.participant.id);
-      $rootScope.notifications.push({message: 'Make sure to save this url, if you want to continue your work later on'});
+      $rootScope.notifications.push({message: 'Make sure to bookmark this url, if you want to continue your work later on'});
     });
   }
 })

@@ -7,13 +7,13 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.hpi.unipotsdam.thorben.dto.CreateNewsThreadDto;
@@ -36,7 +36,11 @@ public class ThreadsResource extends AbstractResource {
     List threads = session.createCriteria(NewsThread.class).list();
     List<NewsThreadDto> result = new ArrayList<NewsThreadDto>();
     for (Object thread : threads) {
-      NewsThreadDto dto = NewsThreadDto.fromNewsThread((NewsThread) thread);
+      NewsThread newsThread = (NewsThread) thread;
+      Number items = (Number) session.createCriteria(ThreadItem.class).add(Restrictions.eq("thread", newsThread))
+          .setProjection(Projections.rowCount()).uniqueResult();
+      
+      NewsThreadDto dto = NewsThreadDto.fromNewsThread((NewsThread) thread, items);
       result.add(dto);
     }
     

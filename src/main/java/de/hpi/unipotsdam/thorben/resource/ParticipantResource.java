@@ -14,9 +14,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
+import de.hpi.unipotsdam.thorben.dto.CountDto;
 import de.hpi.unipotsdam.thorben.dto.RatingDto;
 import de.hpi.unipotsdam.thorben.entity.Participant;
 import de.hpi.unipotsdam.thorben.entity.QuestionItem;
@@ -94,6 +96,28 @@ public class ParticipantResource extends AbstractResource {
       result.add(RatingDto.fromRating(rating));
     }
     
+    return result;
+  }
+  
+  @GET
+  @Path("ratings/count")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Transactional(readOnly = true)
+  public CountDto getRatingsCount(@PathParam("id") String participantId, @QueryParam("threadId") Long threadId) {
+    ensureParticipantExists(participantId);
+    
+    Session session = sessionHelper.getCurrentSession();
+    
+    String query = "select count(distinct item.id) from Rating rating " +
+    		"inner join rating.threadItem item " +
+    		//"with rating.item_id = item.id " +
+    		"where rating.participant.id = :participantId " +
+    		"and item.thread.id = :threadId";
+    Number count = (Number) session.createQuery(query)
+        .setParameter("participantId", participantId).setParameter("threadId", threadId).uniqueResult();
+    
+    CountDto result = new CountDto();
+    result.setCount(count.intValue());
     return result;
   }
   
