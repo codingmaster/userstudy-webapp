@@ -9,8 +9,13 @@
     Thorben Lindhauer <a href="mailto:thorben.lindhauer@student.hpi.uni-potsdam.de">thorben.lindhauer@student.hpi.uni-potsdam.de</a>
 </p>
 <form ng-submit="createParticipant()">
+  <label>Personal data:</label><br/>
   <input type="text" ng-model="participant.name" size="30" placeholder="Your name (optional)">
-  <input type="text" ng-model="participant.email" size="30" placeholder="Your email address (optional)">
+  <input type="text" ng-model="participant.email" size="30" placeholder="Your email address (optional)"><br/><br/>
+  <label>What kind of written news sources do you consume (online, printed, ...)?</label><br/>
+  <input type="text" size="120" required><br/><br/>
+  <label>How often do you consume written news sources?</label><br/>
+  <input type="text" size="120" required><br/><br/>
   <input class="btn-primary" type="submit" value="Participate">
 </form>
 
