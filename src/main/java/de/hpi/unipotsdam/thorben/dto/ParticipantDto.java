@@ -6,6 +6,7 @@ public class ParticipantDto {
 
   private String id;
   private String name;
+  private String email;
   
   
   public String getId() {
@@ -20,9 +21,16 @@ public class ParticipantDto {
   public void setName(String name) {
     this.name = name;
   }
+  public String getEmail() {
+    return email;
+  }
+  public void setEmail(String email) {
+    this.email = email;
+  }
   
   public void updateFrom(Participant participant) {
     id = participant.getId();
     name = participant.getName();
+    email = participant.getEmail();
   }
 }

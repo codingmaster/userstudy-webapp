@@ -24,6 +24,7 @@ public class ParticipantsResource extends AbstractResource {
     
     Participant participant = new Participant();
     participant.setName(participantDto.getName());
+    participant.setEmail(participantDto.getEmail());
     
     session.save(participant);
     

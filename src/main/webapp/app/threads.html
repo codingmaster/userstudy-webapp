@@ -3,7 +3,7 @@
   <li ng-repeat="thread in threads" class="thread-container">
     <div>
       <h2>{{thread.title}}</h2>
-      <p>{{thread.description}}</p>
+      <div ng-bind-html="thread.description"></div>
       <p>Articles rated: {{ratingsCountByThread[thread.id].count}}/{{thread.itemCount}} - {{getMessageForRating(ratingsCountByThread[thread.id].count, thread.itemCount)}} <a ng-href="#/{{participantid}}/thread/{{thread.id}}">Work on it</a></p>
       
     </div>
