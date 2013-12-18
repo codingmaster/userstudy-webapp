@@ -1,8 +1,8 @@
-<h1>Open News Threads:</h1>
+<h2>Open News Threads:</h2>
 <ul>
   <li ng-repeat="thread in threads" class="thread-container">
     <div>
-      <h2>{{thread.title}}</h2>
+      <h3>{{thread.title}}</h3>
       <div ng-bind-html="thread.description"></div>
       <p>Articles rated: {{ratingsCountByThread[thread.id].count}}/{{thread.itemCount}} - {{getMessageForRating(ratingsCountByThread[thread.id].count, thread.itemCount)}} <a ng-href="#/{{participantid}}/thread/{{thread.id}}">Work on it</a></p>
       

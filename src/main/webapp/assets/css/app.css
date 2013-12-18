@@ -1,24 +1,24 @@
 /* general */
-h1 {
+h1, h2, h3, h4, p, td, div {
   font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+h1 {
   font-size: 24pt;
   margin: 7px;
 }
 
 h2 {
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 18pt;
   margin: 5px;
 }
 
 h3 {
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 14pt;
   margin: 5px;
 }
 
 h4 {
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 10pt;
   margin: 2px;
 }
@@ -29,19 +29,13 @@ li {
 }
 
 p {
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 12pt;
   margin-top: 2px;
 }
 
 td {
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   font-size: 11pt;
   padding-right: 10px;
-}
-
-div {
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 
 /* rating directive */
@@ -79,20 +73,22 @@ div {
 
 /* error notification area */
 .errors {
-  padding: 10px;
+  position: fixed;
 }
 
 .error {
   background-color: #FF4D4D;
+  margin: 5px;
 }
 
 /* standard notification area */
 .notifications {
-  padding: 10px;
+  position: fixed;
 }
 
 .notification {
   background-color: #FFFF4D;
+  margin: 5px;
 }
 
 li.thread-container {
@@ -115,7 +111,6 @@ li.thread-item-container {
 }
 
 .clickable {
-  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
   cursor: pointer;
 }
 

@@ -36,6 +36,33 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
   }
 })
 
+.directive('navigation', function($routeParams) {
+  return {
+    restrict: 'A',
+    templateUrl: 'app/directives/navigation.html',
+    link: function(scope, element, attributes) {
+      scope.links = {};
+      var updateParticipantLink = function() {
+        if ($routeParams.participantid) {
+          scope.links['participant'] = ({ref: '#/' + $routeParams.participantid, label: 'Home'});
+        }
+      };
+      
+      
+      
+      updateParticipantLink();
+      
+      scope.$on('$routeChangeSuccess', function() {
+        updateParticipantLink();
+      });
+      
+      
+      
+      
+    }
+  };
+})
+
 .directive('likertItem', function() {
   return {
     restrict: 'A',
