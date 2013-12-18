@@ -57,7 +57,10 @@ public class ArticleDto {
     dto.id = article.getId();
     dto.title = article.getTitle();
     dto.content = article.getContent();
-    dto.abstractContent = article.getAbstractContent();
+    dto.abstractContent = article.getHtmlAbstractContent();
+    if (dto.abstractContent == null) {
+      dto.abstractContent = article.getAbstractContent();
+    }
     dto.publicationDate = article.getPublicationDate();
     return dto;
   }
