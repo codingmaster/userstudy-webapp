@@ -8,13 +8,24 @@
   Thanks for your participation! Submitting your email address is optional, but if you do you and complete at least YY threads, you are awarded a delicious bar of chocolate.
 </p>
 <form ng-submit="createParticipant()">
-  <label>Personal data:</label>
-  <input type="text" ng-model="participant.name" size="30" placeholder="Your name (optional)">
-  <input type="text" ng-model="participant.email" size="30" placeholder="Your email address (optional)">
-  <label>What kind of written news sources do you consume (online, printed, ...)?</label>
-  <input type="text" size="120" required>
-  <label>How often do you consume written news sources?</label>
-  <input type="text" size="120" required>
-  <input class="btn-primary" type="submit" value="Participate">
+  <div class="form-field">
+    <label>Personal data:</label>
+    <input type="text" ng-model="participant.name" size="30" placeholder="Your name (optional)">
+    <input type="text" ng-model="participant.email" size="30" placeholder="Your email address (optional)">
+  </div>
+  
+  <div class="form-field">
+    <label>What kind of written news sources do you consume (online, printed, ...)?</label>
+    <input type="text" size="120" required>
+  </div>
+    
+  <div class="form-field">
+    <label>How often do you consume written news sources?</label>
+    <input type="text" size="120" required>
+  </div>
+    
+  <div class="form-field">
+    <input class="btn-primary" type="submit" value="Participate">
+  </div>
 </form>
 

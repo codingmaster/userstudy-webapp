@@ -19,6 +19,7 @@ public class Article {
   private String title;
   private String content;
   private String abstractContent;
+  private String htmlAbstractContent;
   private Timestamp publicationDate;
   
   @Id
@@ -59,6 +60,16 @@ public class Article {
 
   public void setAbstractContent(String abstractContent) {
     this.abstractContent = abstractContent;
+  }
+
+  @Lob
+  @Column(name = "html_abstract", length = 512)
+  public String getHtmlAbstractContent() {
+    return htmlAbstractContent;
+  }
+  
+  public void setHtmlAbstractContent(String htmlAbstractContent) {
+    this.htmlAbstractContent = htmlAbstractContent;
   }
 
   @Column(name = "publication_date")
