@@ -38,6 +38,10 @@ td {
   padding-right: 10px;
 }
 
+body {
+  background-color: #d8d8d8;
+}
+
 /* rating directive */
 .rating{
   color: #a9a9a9;
@@ -102,8 +106,7 @@ li.thread-item-container {
 }
 
 .view {
-  margin-left: 50px;
-  margin-right: 50px;
+  background-color: #fff;
 }
 
 .active {
@@ -120,10 +123,17 @@ li.thread-item-container {
 
 .inline-container > * {
   display: inline-block;
+  /*box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */
 }
 
 .right {
   float: right;
+}
+
+.header {
+  background-color: #4f4f4f;
+  color: #fff;
 }
 
 .footer {
@@ -133,3 +143,19 @@ li.thread-item-container {
   margin-top: 50px;
 }
 
+.layout-container {
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.navigation {
+  width: 60px;
+  vertical-align: top;
+  margin-left: -90px;
+  padding: 15px;
+}
+
+.body {
+  padding-left: 90px;
+}

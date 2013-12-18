@@ -1,20 +1,20 @@
-<p>
-  In this study, you will be prompted with a set of news threads from the years 2006 and 2007. For each thread, there is contextual information supplied such that you know what was going on in that topic. When you choose to work on one of these threads, a small number of articles from the New York Times is presented to you. You are asked to answer some questions regarding each of these articles. There is no need for you to work on every one of these threads. Just choose the ones you like. It is more helpful for me, if you rate a single thread completely instead of rating multiple threads partially. Evaluating a single thread takes approximately XX minutes.
-</p>
+<div class="instructions">
+  <p>
+    In this study, you will be prompted with a set of news threads from the years 2006 and 2007. For each thread, there is contextual information supplied such that you know what was going on in that topic. When you choose to work on one of these threads, a small number of articles from the New York Times is presented to you. You are asked to answer some questions regarding each of these articles. There is no need for you to work on every one of these threads. Just choose the ones you like. It is more helpful for me, if you rate a single thread completely instead of rating multiple threads partially. Evaluating a single thread takes approximately XX minutes.
+  </p>
+</div>
+
 <p>
   Thanks for your participation! Submitting your email address is optional, but if you do you and complete at least YY threads, you are awarded a delicious bar of chocolate.
 </p>
-<p>
-    Thorben Lindhauer <a href="mailto:thorben.lindhauer@student.hpi.uni-potsdam.de">thorben.lindhauer@student.hpi.uni-potsdam.de</a>
-</p>
 <form ng-submit="createParticipant()">
-  <label>Personal data:</label><br/>
+  <label>Personal data:</label>
   <input type="text" ng-model="participant.name" size="30" placeholder="Your name (optional)">
-  <input type="text" ng-model="participant.email" size="30" placeholder="Your email address (optional)"><br/><br/>
-  <label>What kind of written news sources do you consume (online, printed, ...)?</label><br/>
-  <input type="text" size="120" required><br/><br/>
-  <label>How often do you consume written news sources?</label><br/>
-  <input type="text" size="120" required><br/><br/>
+  <input type="text" ng-model="participant.email" size="30" placeholder="Your email address (optional)">
+  <label>What kind of written news sources do you consume (online, printed, ...)?</label>
+  <input type="text" size="120" required>
+  <label>How often do you consume written news sources?</label>
+  <input type="text" size="120" required>
   <input class="btn-primary" type="submit" value="Participate">
 </form>
 
