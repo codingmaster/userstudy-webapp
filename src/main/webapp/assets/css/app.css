@@ -41,10 +41,6 @@ body {
   background-color: #d8d8d8;
 }
 
-a {
-  color: #4f4f4f;
-}
-
 /* rating directive */
 .rating{
   color: #a9a9a9;
@@ -67,14 +63,19 @@ a {
 }
 
 /* likert-item directive */
-.likert-item {
+.likert-item, .user-action {
   margin-top: 15px;
   font-size: 11pt;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eae09d;
+  padding: 10px;
 }
 
 .likert-option {
   margin-right: 5px;
   margin-left: 5px;
+  margin-top: 5px;
 }
 
 
@@ -99,18 +100,13 @@ a {
   margin: 5px;
 }
 
-li.thread-container {
+.item-container {
   list-style-type: none;
-  padding: 3px;
+  padding: 10px;
   margin: 20px;
-}
-
-li.thread-item-container {
-  list-style-type: none;
-  outline: solid;
-  outline-width: 2px;
-  padding: 3px;
-  margin: 20px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #e4d881;/*#dacc7a;*/
 }
 
 .view {
@@ -170,6 +166,13 @@ li.thread-item-container {
   margin: 10px;
 }
 
+.instructions {
+  background-color: #d8d8d8;
+  padding: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
 a.menu-link {
-  color: #fff;
+  color: #4f4f4f;
 }

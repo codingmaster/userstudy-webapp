@@ -1,16 +1,21 @@
 <div class="instructions">
-  <p>
+  <ul class="fa-ul">
+    <li><i class="fa-li fa fa-hand-o-right"></i>Read every article and give your opinion by answering the follow-up questions</li>
+    <li><i class="fa-li fa fa-hand-o-right"></i>Reading only the summary is perfectly fine</li>
+    <li><i class="fa-li fa fa-hand-o-right"></i>Feel free to read the full content for clarification or if you need additional context</li>
+  </ul>
+  <!--<p>
     Please read every article and answer the following questions dealing with your expectation of content. It is sufficient to base your judgements on the summaries. However, if you need further clarification or context, you can also read the complete article.
-  </p>
+  </p>-->
 </div>
 
 <h1>{{thread.title}}:</h1>
 <ul>
-  <li ng-repeat="item in items" ng-controller="ItemController" class="thread-item-container" ng-class="{active: visible}">
+  <li ng-repeat="item in items" ng-controller="ItemController" class="item-container" ng-class="{active: visible}">
     <div class="inline-container">
       <h2 ng-click="visible = !visible" class="clickable">{{item.article.title}}</h2>
-      <div ng-click="visible = !visible" ng-show="!visible" class="clickable">Show Full Content</div>
-      <div ng-click="visible = !visible" ng-show="!visible" class="clickable">Hide</div>
+      <div ng-click="visible = !visible" ng-show="!visible" class="clickable user-action">Show Full Content</div>
+      <div ng-click="visible = !visible" ng-show="visible" class="clickable user-action">Hide</div>
       <h4 class="right">{{item.article.publicationDate | date:'short'}}</h4>
     </div>
     <div>

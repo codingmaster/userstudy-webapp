@@ -1,19 +1,32 @@
 <div class="instructions">
-  <p>
+  <ul class="fa-ul">
+    <li><i class="fa-li fa fa-hand-o-right"></i>A thread is a collection of articles that I would like to get your opinion on</li>
+    <li><i class="fa-li fa fa-hand-o-right"></i>Choose the threads you like</li>
+    <li><i class="fa-li fa fa-hand-o-right"></i>There is no need to work on every thread</li>
+    <li><i class="fa-li fa fa-hand-o-right"></i>It is more helpful to me, if you complete a single thread instead of partially answering multiple threads</li>
+    <li><i class="fa-li fa fa-hand-o-right"></i>Read the context of a thread to get into matters</li>
+    <li><i class="fa-li fa fa-hand-o-right"></i>Completing a thread takes approximately XX minutes</li>
+  </ul>
+  <!--<p>
     Please choose a thread that matches your interests and taste and that you would like to work on. A small number of news articles from the New York Times will be presented to you. You will be asked to answer some questions regarding each of these articles. There is no need for you to work on every one of these threads. Just choose the ones you like. It is more helpful for me, if you rate a single thread completely instead of rating multiple threads partially. Evaluating a single thread takes approximately XX minutes.
-  </p>
+  </p>-->
 </div>
 
-<h2>Open News Threads:</h2>
+<h1>Open News Threads:</h1>
 <ul>
-  <li ng-repeat="thread in threads" class="thread-container">
+  <li ng-repeat="thread in threads" class="item-container">
     <div>
-      <h3>{{thread.title}}</h3>
+      <h2>{{thread.title}}</h2>
+      <h4>Context</h4>
       <div ng-bind-html="thread.description"></div>
-      <p>Articles rated: {{ratingsCountByThread[thread.id].count}}/{{thread.itemCount}} - {{getMessageForRating(ratingsCountByThread[thread.id].count, thread.itemCount)}}
-      <a ng-href="#/{{participantid}}/thread/{{thread.id}}">Work on it</a>
-      <button ng-click="visitThread(thread.id)">Go</button>
-      </p>
+      <div class="inline-container">
+        <div class="user-action">
+          Articles rated: {{ratingsCountByThread[thread.id].count}}/{{thread.itemCount}} - {{getMessageForRating(ratingsCountByThread[thread.id].count, thread.itemCount)}}
+        </div>
+        <div class="user-action">
+          <a ng-href="#/{{participantid}}/thread/{{thread.id}}" class="user-action">Work on it</a>
+        </div>
+      </div>
       
     </div>
   </li>
