@@ -48,17 +48,11 @@ angular.module('userstudy_directives', ['ngRoute', 'restApi'])
         }
       };
       
-      
-      
       updateParticipantLink();
       
       scope.$on('$routeChangeSuccess', function() {
         updateParticipantLink();
       });
-      
-      
-      
-      
     }
   };
 })

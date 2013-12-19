@@ -10,7 +10,10 @@
     <div>
       <h3>{{thread.title}}</h3>
       <div ng-bind-html="thread.description"></div>
-      <p>Articles rated: {{ratingsCountByThread[thread.id].count}}/{{thread.itemCount}} - {{getMessageForRating(ratingsCountByThread[thread.id].count, thread.itemCount)}} <a ng-href="#/{{participantid}}/thread/{{thread.id}}">Work on it</a></p>
+      <p>Articles rated: {{ratingsCountByThread[thread.id].count}}/{{thread.itemCount}} - {{getMessageForRating(ratingsCountByThread[thread.id].count, thread.itemCount)}}
+      <a ng-href="#/{{participantid}}/thread/{{thread.id}}">Work on it</a>
+      <button ng-click="visitThread(thread.id)">Go</button>
+      </p>
       
     </div>
   </li>
