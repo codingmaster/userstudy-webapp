@@ -41,6 +41,10 @@ body {
   background-color: #d8d8d8;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* rating directive */
 .rating{
   color: #a9a9a9;
@@ -70,6 +74,7 @@ body {
   border-radius: 10px;
   background-color: #eae09d;
   padding: 10px;
+  color: #000;
 }
 
 .likert-option {

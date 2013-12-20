@@ -5,14 +5,15 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
+           
   <http>
     <!-- may have multiple such 'intercept-url' tags been matched in declared order -->
-    <intercept-url pattern="/rest/users" method="POST" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-    <intercept-url pattern="/rest/threads" method="POST" access="ROLE_ADMIN"/> 
-    <intercept-url pattern="/rest/**" access="ROLE_USER" /> <!-- attribute 'requires-channel="https"' -->
+    <intercept-url pattern="/rest/threads" method="POST" access="ROLE_ADMIN" requires-channel="https"/> 
+    <!-- <intercept-url pattern="/rest/**" access="ROLE_USER" /> --> <!-- attribute 'requires-channel="https"' -->
+    <intercept-url pattern="/**" access="ROLE_USER" requires-channel="https"/>
     
     <http-basic />
-    <!-- <openid-login /> -->
+<!--     <openid-login/> -->
   </http>
   
   <!-- Example to bypass security for certain urls -->
@@ -21,18 +22,17 @@
   
   <authentication-manager>
     <!-- may have multiple authentication providers -->
-    <authentication-provider user-service-ref='userDetailsService'>
+    <authentication-provider> <!-- user-service-ref='userDetailsService' -->
       <!-- demo users -->
-      <!-- <user-service>
-        <user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
-        <user name="bob" password="bobspassword" authorities="ROLE_USER" />
-      </user-service> -->
+      <user-service>
+        <user name="student" password="shegalkin" authorities="ROLE_USER" />
+      </user-service>
     </authentication-provider>
   </authentication-manager>
   
-  <beans:bean id="userDetailsService" class="de.hpi.unipotsdam.thorben.security.MyUserDetailsService">
+  <!-- <beans:bean id="userDetailsService" class="de.hpi.unipotsdam.thorben.security.MyUserDetailsService">
     <beans:property name="sessionHelper">
       <beans:ref bean="sessionHelper"/>
     </beans:property>
-  </beans:bean>
+  </beans:bean> -->
 </beans:beans>
