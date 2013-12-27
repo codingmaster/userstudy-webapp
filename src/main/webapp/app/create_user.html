@@ -1,26 +1,32 @@
 <div class="instructions">
   <p>
-    In this study, you will be prompted with a set of news threads from the years 2006 and 2007. For each thread, there is contextual information supplied such that you know what was going on in that topic. When you choose to work on one of these threads, a small number of articles from the New York Times is presented to you. You are asked to answer some questions regarding each of these articles. There is no need for you to work on every one of these threads. Just choose the ones you like. It is more helpful for me, if you rate a single thread completely instead of rating multiple threads partially. Evaluating a single thread takes approximately XX minutes.
+    Hi!
+  </p>
+  <p>
+    I am Thorben and I am currently working on my Master's thesis on news articles. And that's why I need your help and your opinion on news stories. No worries, this is no test and there is no right or wrong ;). You will be presented abstracts of news articles and have to provide your opinion on some statements regarding the content. The articles are from the years 2005 - 2007, so it might also be fun to recall what was going on in these days.
+  </p>
+  <p>
+    So what's in for you? If you participate and provide your email address below, you win a delicious bar of chocolate.
+  </p>
+  <p>
+    Thanks for your participation!
   </p>
 </div>
 
-<p>
-  Thanks for your participation! Submitting your email address is optional, but if you do you and complete at least YY threads, you are awarded a delicious bar of chocolate.
-</p>
 <form ng-submit="createParticipant()">
   <div class="form-field">
     <label>Personal data:</label>
-    <input type="text" ng-model="participant.name" size="30" placeholder="Your name (optional)">
+    <!--<input type="text" ng-model="participant.name" size="30" placeholder="Your name (optional)">-->
     <input type="text" ng-model="participant.email" size="30" placeholder="Your email address (optional)">
   </div>
   
   <div class="form-field">
-    <label>What kind of written news sources do you consume (online, printed, ...)?</label>
+    <label>Which written news sources do you consume (e.g. sueddeutsche.de, WirtschaftsWoche, ...)?</label>
     <input type="text" size="120" required>
   </div>
     
   <div class="form-field">
-    <label>How often do you consume written news sources?</label>
+    <label>How much time do you spend reading news every day? Please provide an average (e.g. if you read a news paper every 3 days for 30 minutes, enter "10 minutes")</label>
     <input type="text" size="120" required>
   </div>
     
