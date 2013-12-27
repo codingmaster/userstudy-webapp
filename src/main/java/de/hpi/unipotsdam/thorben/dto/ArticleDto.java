@@ -56,7 +56,10 @@ public class ArticleDto {
     ArticleDto dto = new ArticleDto();
     dto.id = article.getId();
     dto.title = article.getTitle();
-    dto.content = article.getContent();
+    dto.content = article.getHtmlContent();
+    if (dto.content == null) {
+      dto.abstractContent = article.getContent();
+    }
     dto.abstractContent = article.getHtmlAbstractContent();
     if (dto.abstractContent == null) {
       dto.abstractContent = article.getAbstractContent();

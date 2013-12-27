@@ -16,6 +16,7 @@
         <property name="show_sql">true</property>
 
         <property name="hbm2ddl.auto">update</property>
+        <property name="default_schema">study</property>
 
         <!-- Names the annotated entity class -->
         <mapping class="de.hpi.unipotsdam.thorben.entity.NewsThread"/>
