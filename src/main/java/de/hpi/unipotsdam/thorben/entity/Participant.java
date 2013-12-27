@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -13,8 +14,10 @@ import org.hibernate.annotations.GenericGenerator;
 public class Participant {
 
   private String id;
-  private String name;
   private String email;
+  private int age;
+  private String publications;
+  private String consumptionBehavior;
   
   @Id
   @GeneratedValue(generator="uuid")
@@ -27,18 +30,36 @@ public class Participant {
   }
   
   @Column
-  public String getName() {
-    return name;
-  }
-  public void setName(String name) {
-    this.name = name;
-  }
-  
-  @Column
   public String getEmail() {
     return email;
   }
   public void setEmail(String email) {
     this.email = email;
   }
+  
+  @Column
+  public int getAge() {
+    return age;
+  }
+  public void setAge(int age) {
+    this.age = age;
+  }
+  
+  @Column(length = 256)
+  public String getPublications() {
+    return publications;
+  }
+  public void setPublications(String publications) {
+    this.publications = publications;
+  }
+  
+  @Column(length = 256)
+  public String getConsumptionBehavior() {
+    return consumptionBehavior;
+  }
+  public void setConsumptionBehavior(String consumptionBehavior) {
+    this.consumptionBehavior = consumptionBehavior;
+  }
+  
+  
 }

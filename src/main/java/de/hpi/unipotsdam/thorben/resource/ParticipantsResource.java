@@ -23,7 +23,9 @@ public class ParticipantsResource extends AbstractResource {
     Session session = sessionHelper.getCurrentSession();
     
     Participant participant = new Participant();
-    participant.setName(participantDto.getName());
+    participant.setConsumptionBehavior(participantDto.getConsumptionBehavior());
+    participant.setPublications(participantDto.getPublications());
+    participant.setAge(participantDto.getAge());
     participant.setEmail(participantDto.getEmail());
     
     session.save(participant);

@@ -15,19 +15,23 @@
 
 <form ng-submit="createParticipant()">
   <div class="form-field">
-    <label>Personal data:</label>
-    <!--<input type="text" ng-model="participant.name" size="30" placeholder="Your name (optional)">-->
-    <input type="text" ng-model="participant.email" size="30" placeholder="Your email address (optional)">
+    <label>Your email address:</label>
+    <input type="text" ng-model="participant.email" size="30" placeholder="optional">
+  </div>
+  
+  <div class="form-field">
+    <label>Your age:</label>
+    <input type="text" ng-model="participant.age" size="30" placeholder="required" required>
   </div>
   
   <div class="form-field">
     <label>Which written news sources do you consume (e.g. sueddeutsche.de, WirtschaftsWoche, ...)?</label>
-    <input type="text" size="120" required>
+    <input type="text" ng-model="participant.publications" size="120" placeholder="required" required>
   </div>
     
   <div class="form-field">
     <label>How much time do you spend reading news every day? Please provide an average (e.g. if you read a news paper every 3 days for 30 minutes, enter "10 minutes")</label>
-    <input type="text" size="120" required>
+    <input type="text" ng-model="participant.consumptionBehavior" size="120" placeholder="required" required>
   </div>
     
   <div class="user-action">
