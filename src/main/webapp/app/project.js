@@ -6,6 +6,9 @@ angular.module('project', ['ngRoute', 'ngSanitize', 'restApi', 'userstudy_direct
       controller: 'ParticipantsController',
       templateUrl: 'app/create_user.html'
     })
+    .when('/about', {
+      templateUrl: 'app/about.html'
+    })
     .when('/:participantid', {
       controller: 'ThreadsController',
       templateUrl: 'app/threads.html'
