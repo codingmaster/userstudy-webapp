@@ -13,15 +13,15 @@
   </p>
 </div>
 
-<form ng-submit="createParticipant()">
+<form ng-submit="createParticipant()" name="form" novalidate>
   <div class="form-field">
     <label>Your email address:</label>
-    <input type="text" ng-model="participant.email" size="30" placeholder="optional">
+    <input type="email" ng-model="participant.email" size="30" placeholder="optional">
   </div>
   
   <div class="form-field">
     <label>Your age:</label>
-    <input type="text" ng-model="participant.age" size="30" placeholder="required" required>
+    <input type="text" ng-model="participant.age" size="30" placeholder="required" required ng-pattern="/^\d+$/">
   </div>
   
   <div class="form-field">
@@ -34,8 +34,9 @@
     <input type="text" ng-model="participant.consumptionBehavior" size="120" placeholder="required" required>
   </div>
     
-  <div class="user-action">
-    <input class="btn-primary" type="submit" value="Participate">
+  <div>
+    <button type="submit" class="user-action" ng-disabled="form.$invalid">Participate</button>
+    <!--<input class="btn-primary" type="submit" value="Participate">-->
   </div>
 </form>
 

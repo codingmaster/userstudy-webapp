@@ -189,3 +189,18 @@ a {
 a.menu-link {
   color: #4f4f4f;
 }
+
+input.ng-pristine {
+  border:1px solid Gold;
+}
+input.ng-dirty.ng-invalid {
+  border:1px solid Red;
+}
+input.ng-dirty.ng-valid {
+  border:1px solid Green;
+}
+
+:disabled {
+  background-color: #d8d8d8;
+  color: #7e7e7e;
+}

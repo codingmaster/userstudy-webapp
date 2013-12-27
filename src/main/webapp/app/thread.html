@@ -11,7 +11,7 @@
 
 <h1>{{thread.title}}:</h1>
 <ul>
-  <li ng-repeat="item in items" ng-controller="ItemController" class="item-container" ng-class="{active: visible}">
+  <li ng-repeat="item in items" ng-controller="ItemController" class="item-container" > <!--ng-class="{active: visible}"-->
     <div class="inline-container">
       <h2 ng-click="visible = !visible" class="clickable">{{item.article.title}}</h2>
       <div ng-click="visible = !visible" ng-show="!visible" class="clickable user-action">Show Full Content</div>
