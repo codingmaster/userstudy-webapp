@@ -109,13 +109,6 @@
       <version>${mysql.version}</version>
     </dependency>
 
-    <!-- This dependency isn't actually needed for the webapp -->
-    <dependency>
-      <groupId>com.hp.gagawa</groupId>
-      <artifactId>gagawa</artifactId>
-      <version>1.0.1</version>
-      <scope>provided</scope>
-    </dependency>
 
     <dependency>
       <groupId>junit</groupId>

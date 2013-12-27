@@ -10,16 +10,20 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "article")
 public class Article {
 
-  private Long id;
+  protected Long id;
   private String title;
   private String content;
+  private String htmlContent;
+  
   private String abstractContent;
   private String htmlAbstractContent;
+  
   private Timestamp publicationDate;
   
   @Id
@@ -43,7 +47,8 @@ public class Article {
   }
   
   @Lob
-  @Column(name = "content", length = 512)
+  @Type(type = "org.hibernate.type.TextType")
+  @Column(name = "content")
   public String getContent() {
     return content;
   }
@@ -53,7 +58,19 @@ public class Article {
   }
   
   @Lob
-  @Column(name = "abstract", length = 512)
+  @Type(type = "org.hibernate.type.TextType")
+  @Column(name = "html_content")
+  public String getHtmlContent() {
+    return htmlContent;
+  }
+
+  public void setHtmlContent(String htmlContent) {
+    this.htmlContent = htmlContent;
+  }
+
+  @Lob
+  @Type(type = "org.hibernate.type.TextType")
+  @Column(name = "abstract")
   public String getAbstractContent() {
     return abstractContent;
   }
@@ -63,7 +80,8 @@ public class Article {
   }
 
   @Lob
-  @Column(name = "html_abstract", length = 512)
+  @Type(type = "org.hibernate.type.TextType")
+  @Column(name = "html_abstract")
   public String getHtmlAbstractContent() {
     return htmlAbstractContent;
   }

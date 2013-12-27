@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "thread")
@@ -43,7 +44,8 @@ public class NewsThread {
   }
 
   @Lob
-  @Column(name = "description", length = 256)
+  @Type(type = "org.hibernate.type.TextType")
+  @Column(name = "description")
   public String getDescription() {
     return description;
   }
