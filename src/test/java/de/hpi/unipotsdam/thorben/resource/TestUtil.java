@@ -6,8 +6,10 @@ import java.util.Properties;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
@@ -31,9 +33,12 @@ public class TestUtil {
       InputStream is = classLoader.getResourceAsStream(DB_PROPERTIES_LOCATION);
       databaseProperties.load(is);
       is.close();
-      
+
       Configuration configuration = new Configuration()
           .configure(HIBERNATE_CFG_LOCATION);
+      configuration.setProperty(AvailableSettings.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+      configuration.setProperty(AvailableSettings.TRANSACTION_STRATEGY, JdbcTransactionFactory.class.getName());
+      configuration.getProperties().remove(AvailableSettings.DEFAULT_SCHEMA);
       configuration.setProperty(Environment.URL, databaseProperties.getProperty(DB_URL_PARAM_NAME));
       configuration.setProperty(Environment.DRIVER, databaseProperties.getProperty(DB_DRIVER_PARAM_NAME));
       configuration.setProperty(Environment.USER, databaseProperties.getProperty(DB_USER_PARAM_NAME));

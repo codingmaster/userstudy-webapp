@@ -53,10 +53,12 @@ public class ThreadsResourceLogicTest {
     articleIds.add(article.getId());
     dto.setArticleIds(articleIds);
     
+    Transaction tx = sessionHelper.getCurrentSession().beginTransaction();
     threadsResource.createThread(dto);
+    tx.commit();
 
     Session session = sessionHelper.getCurrentSession();
-    Transaction tx = session.beginTransaction();
+    tx = session.beginTransaction();
     List threads = session.createCriteria(NewsThread.class).list();
     
     Assert.assertEquals(1, threads.size());
@@ -72,6 +74,11 @@ public class ThreadsResourceLogicTest {
     Assert.assertEquals(article.getTitle(), item.getArticle().getTitle());
     
     tx.commit();
+  }
+  
+  @Test
+  public void testThreadSelectionByOrder() {
+    
   }
   
 }

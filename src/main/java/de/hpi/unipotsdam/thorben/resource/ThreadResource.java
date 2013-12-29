@@ -44,7 +44,7 @@ public class ThreadResource extends AbstractResource {
   public List<ThreadItemDto> getItems(@PathParam("id") Long threadId) {
     Session session = sessionHelper.getCurrentSession();
     
-    Query itemQuery = session.getNamedQuery("ThreadItem.selectArticlesForThread");
+    Query itemQuery = session.getNamedQuery("ThreadItem.selectItemsSortedByArticle");
     itemQuery.setParameter("threadId", threadId);
     List<ThreadItem> items = itemQuery.list();
     
