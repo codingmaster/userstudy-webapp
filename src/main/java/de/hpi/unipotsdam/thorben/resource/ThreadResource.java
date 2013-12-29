@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
@@ -41,10 +42,17 @@ public class ThreadResource extends AbstractResource {
   @GET
   @Path("items")
   @Transactional(readOnly = true)
-  public List<ThreadItemDto> getItems(@PathParam("id") Long threadId) {
+  public List<ThreadItemDto> getItems(@PathParam("id") Long threadId, @QueryParam("sortBy") String sortBy) {
     Session session = sessionHelper.getCurrentSession();
     
-    Query itemQuery = session.getNamedQuery("ThreadItem.selectItemsSortedByArticle");
+    Query itemQuery;
+    
+    if ("logical_order".equals(sortBy)) {
+      itemQuery = session.getNamedQuery("ThreadItem.selectItemsSortedByOrder");
+    } else {
+      itemQuery = session.getNamedQuery("ThreadItem.selectItemsSortedByArticle");
+    }
+    
     itemQuery.setParameter("threadId", threadId);
     List<ThreadItem> items = itemQuery.list();
     
