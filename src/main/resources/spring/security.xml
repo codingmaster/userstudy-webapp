@@ -6,7 +6,7 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
            
-  <http>
+  <http realm="Serendipity Application">
     <!-- may have multiple such 'intercept-url' tags been matched in declared order -->
     <intercept-url pattern="/rest/threads" method="POST" access="ROLE_ADMIN" requires-channel="https"/> 
     <!-- <intercept-url pattern="/rest/**" access="ROLE_USER" /> --> <!-- attribute 'requires-channel="https"' -->
